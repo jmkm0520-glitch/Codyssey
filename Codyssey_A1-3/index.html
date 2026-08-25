@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="냉장고 속 재료와 원하는 조건을 입력하면 AI가 냉털 레시피 5가지를 추천합니다." />
+  <meta name="theme-color" content="#f6f2e7" />
+  <title>오늘 뭐 먹지? 냉털 AI</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#recommend">추천 입력으로 바로가기</a>
+
+  <header class="site-header" id="home">
+    <a class="brand" href="#home" aria-label="오늘 뭐 먹지 홈으로">
+      <span class="brand-mark" aria-hidden="true">🥬</span>
+      <span class="brand-text">오늘 뭐 먹지?</span>
+    </a>
+
+    <nav class="desktop-nav" aria-label="주요 메뉴">
+      <a href="#recommend">AI 추천</a>
+      <a href="#features">서비스 소개</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <button id="favoritesToggle" class="ghost-button favorites-button" type="button">
+      <span aria-hidden="true">★</span>
+      즐겨찾기
+      <span id="favoriteCount" class="count-badge">0</span>
+    </button>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy-wrap">
+        <p class="eyebrow">냉장고 파먹기, 더 쉽고 맛있게</p>
+        <h1 id="hero-title">남은 재료가<br /><span>오늘의 메뉴</span>가 됩니다.</h1>
+        <p class="hero-copy">
+          냉장고 속 재료를 태그로 등록하고 원하는 조건을 적어보세요.<br class="desktop-break" />
+          AI가 지금 만들기 좋은 레시피 5가지를 골라드립니다.
+        </p>
+        <div class="hero-actions">
+          <a class="primary-link" href="#recommend">재료 입력하러 가기</a>
+          <a class="text-link" href="#features">어떻게 추천하나요?</a>
+        </div>
+        <ul class="hero-points" aria-label="주요 기능">
+          <li><strong>최대 30개</strong> 재료 입력</li>
+          <li><strong>5가지</strong> 맞춤 레시피</li>
+          <li><strong>즐겨찾기</strong> 브라우저 저장</li>
+        </ul>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <div class="fridge-card">
+          <div class="fridge-card-top">
+            <span>나의 냉장고</span>
+            <span class="live-dot">AI 준비 완료</span>
+          </div>
+          <div class="sample-tags">
+            <span>두부</span><span>달걀</span><span>대파</span><span>김치</span>
+          </div>
+          <div class="sample-result">
+            <span class="sample-icon">🍳</span>
+            <div>
+              <strong>두부 김치 달걀볶음</strong>
+              <small>약 15분 · 쉬움</small>
+            </div>
+          </div>
+          <div class="sample-result muted-result">
+            <span class="sample-icon">🥘</span>
+            <div>
+              <strong>대파 두부덮밥</strong>
+              <small>약 20분 · 쉬움</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="recommend" class="recommend-layout" aria-labelledby="input-title">
+      <div class="section-intro">
+        <p class="eyebrow">AI Recipe Generator</p>
+        <h2>냉장고에 있는 재료를 알려주세요.</h2>
+        <p>재료를 하나씩 입력해 태그로 추가하세요. 조건은 선택사항입니다.</p>
+      </div>
+
+      <div class="panel">
+        <div class="field-heading">
+          <div>
+            <h3 id="input-title">냉장고 재료</h3>
+            <p>같은 재료는 한 번만 등록됩니다.</p>
+          </div>
+          <span id="ingredientCounter" class="ingredient-counter">0 / 30</span>
+        </div>
+
+        <div class="ingredient-row">
+          <input id="ingredientInput" type="text" maxlength="30"
+                 placeholder="예: 두부" autocomplete="off" aria-describedby="ingredientHelp" />
+          <button id="addIngredientButton" class="secondary-button" type="button">+ 추가</button>
+        </div>
+        <div id="ingredientTags" class="tag-list" aria-live="polite"></div>
+        <p id="ingredientHelp" class="help-text">Enter 또는 + 추가를 눌러 재료를 등록하세요.</p>
+
+        <label for="conditionInput">원하는 조건 <span>(선택)</span></label>
+        <textarea id="conditionInput" rows="3" maxlength="300"
+                  placeholder="예: 20분 안에, 맵지 않게, 다이어트용"></textarea>
+
+        <div class="quick-conditions" aria-label="조건 빠른 입력">
+          <button class="condition-chip" type="button" data-condition="20분 안에">20분 안에</button>
+          <button class="condition-chip" type="button" data-condition="맵지 않게">맵지 않게</button>
+          <button class="condition-chip" type="button" data-condition="다이어트용">다이어트용</button>
+          <button class="condition-chip" type="button" data-condition="간단한 한 끼">간단한 한 끼</button>
+        </div>
+
+        <button id="recommendButton" class="primary-button" type="button">
+          <span class="button-text">AI 레시피 5개 추천받기</span>
+          <span class="spinner" aria-hidden="true"></span>
+        </button>
+        <p id="statusMessage" class="status" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section id="resultsSection" class="results-section hidden" aria-labelledby="results-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">오늘의 추천</p>
+          <h2 id="results-title">냉털 레시피 5가지</h2>
+          <p>마음에 드는 레시피의 별을 눌러 저장하세요.</p>
+        </div>
+        <button id="retryButton" class="ghost-button" type="button">다시 추천받기</button>
+      </div>
+      <div id="recipeGrid" class="recipe-grid"></div>
+    </section>
+
+    <section id="favoritesSection" class="results-section favorites-section hidden" aria-labelledby="favorites-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">나중에 또 만들기</p>
+          <h2 id="favorites-title">즐겨찾기</h2>
+          <p>이 브라우저에 저장된 레시피입니다.</p>
+        </div>
+        <button id="closeFavorites" class="ghost-button" type="button">닫기</button>
+      </div>
+      <div id="favoritesGrid" class="recipe-grid"></div>
+      <p id="emptyFavorites" class="empty-message hidden">아직 저장한 레시피가 없어요. 추천 카드의 ☆를 눌러보세요.</p>
+    </section>
+
+    <section id="features" class="content-section" aria-labelledby="features-title">
+      <div class="section-intro centered">
+        <p class="eyebrow">Why Fridge AI</p>
+        <h2 id="features-title">버려질 재료를 맛있는 한 끼로</h2>
+        <p>복잡한 검색 없이, 지금 가진 재료에서 시작합니다.</p>
+      </div>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <span class="feature-icon" aria-hidden="true">🧺</span>
+          <h3>남은 재료 우선</h3>
+          <p>등록한 재료를 최대한 활용하고, 꼭 필요한 추가 재료만 구분해 알려줍니다.</p>
+        </article>
+        <article class="feature-card">
+          <span class="feature-icon" aria-hidden="true">✨</span>
+          <h3>조건까지 맞춤 추천</h3>
+          <p>조리 시간, 매운맛, 식단 목적 등 원하는 조건을 함께 반영합니다.</p>
+        </article>
+        <article class="feature-card">
+          <span class="feature-icon" aria-hidden="true">⭐</span>
+          <h3>간편한 레시피 저장</h3>
+          <p>마음에 드는 레시피는 즐겨찾기에 저장하고 같은 브라우저에서 다시 볼 수 있습니다.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="faq" class="content-section faq-section" aria-labelledby="faq-title">
+      <div class="section-intro centered">
+        <p class="eyebrow">FAQ</p>
+        <h2 id="faq-title">자주 묻는 질문</h2>
+      </div>
+      <div class="faq-list">
+        <details>
+          <summary>재료는 최대 몇 개까지 입력할 수 있나요?</summary>
+          <p>한 번에 최대 30개까지 등록할 수 있습니다. 중복 재료는 자동으로 걸러집니다.</p>
+        </details>
+        <details>
+          <summary>추천 결과는 어디에 저장되나요?</summary>
+          <p>즐겨찾기에 추가한 레시피만 현재 브라우저의 localStorage에 저장됩니다.</p>
+        </details>
+        <details>
+          <summary>AI 추천을 그대로 따라도 되나요?</summary>
+          <p>재료의 실제 상태, 알레르기, 익힘 정도를 직접 확인한 뒤 안전하게 조리해 주세요.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <a class="brand footer-brand" href="#home">
+          <span class="brand-mark" aria-hidden="true">🥬</span>
+          <span>오늘 뭐 먹지? 냉털 AI</span>
+        </a>
+        <p>냉장고 속 재료로 오늘의 메뉴를 찾는 AI 레시피 서비스</p>
+      </div>
+      <div class="footer-tech" aria-label="사용 기술">
+        <span>Vanilla JavaScript</span>
+        <span>Python API</span>
+        <span>OpenRouter</span>
+        <span>Vercel</span>
+      </div>
+    </div>
+    <p class="safety-note">AI가 만든 조리 정보는 재료 상태와 알레르기를 직접 확인한 뒤 활용해 주세요.</p>
+  </footer>
+</body>
+</html>

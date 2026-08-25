@@ -1,0 +1,6 @@
+.DS_Store
+tmp/
+build_submission_docs.py
+fontconfig-macos.xml
+final_submission/qa/
+final_submission/회의비서AI_배포화면.png

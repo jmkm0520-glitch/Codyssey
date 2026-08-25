@@ -1,0 +1,7 @@
+# 개인 과제 메모
+subject.md
+
+# Python 실행 캐시 및 로컬 가상환경
+__pycache__/
+*.py[cod]
+.venv/

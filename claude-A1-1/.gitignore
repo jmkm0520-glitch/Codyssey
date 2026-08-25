@@ -1,0 +1,9 @@
+subject.md
+.claude/
+
+__pycache__/
+*.pyc
+.venv/
+venv/
+prompts.json
+exports/
