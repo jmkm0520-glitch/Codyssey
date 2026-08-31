@@ -1,1 +1,3 @@
 """HTTP 요청과 응답을 담당하는 API 라우터 패키지."""
+
+from backend.routers.api import router as api_router
