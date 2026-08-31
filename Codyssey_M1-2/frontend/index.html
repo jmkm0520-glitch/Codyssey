@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>온라인 쇼핑몰 매출 분석 AI</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">본문으로 건너뛰기</a>
+
+    <header class="app-header">
+      <h1>온라인 쇼핑몰 매출 분석 AI</h1>
+      <p class="app-description">
+        저장된 날짜별 매출을 확인하고 관리하며, AI에게 매출 흐름을 물어볼 수 있는 업무용 도구입니다.
+      </p>
+      <nav class="app-nav" aria-label="빠른 이동">
+        <a href="#summary-section">매출 요약</a>
+        <a href="#data-section">매출 데이터</a>
+        <a href="#chat-section">AI 채팅</a>
+      </nav>
+    </header>
+
+    <div id="status-banner" class="status-banner" role="status" aria-live="polite" hidden></div>
+
+    <main id="main-content">
+      <p class="cold-start-notice">
+        무료 서버 특성상 서버가 잠들어 있으면 첫 요청에 최대 1분 정도 걸릴 수 있습니다. 잠시만 기다려 주세요.
+      </p>
+
+      <section id="summary-section" class="panel" aria-labelledby="summary-heading">
+        <h2 id="summary-heading">매출 요약</h2>
+        <div id="summary-content" class="summary-grid" aria-live="polite">
+          <p class="placeholder">매출 요약을 불러오는 중입니다...</p>
+        </div>
+      </section>
+
+      <section id="data-section" class="panel" aria-labelledby="data-heading">
+        <h2 id="data-heading">매출 데이터</h2>
+
+        <form id="data-form" class="data-form" aria-label="새 매출 추가">
+          <div class="form-row">
+            <label for="data-date">날짜</label>
+            <input type="date" id="data-date" name="date" required />
+          </div>
+          <div class="form-row">
+            <label for="data-value">매출(GBP)</label>
+            <input
+              type="number"
+              id="data-value"
+              name="value"
+              min="0"
+              step="0.01"
+              inputmode="decimal"
+              required
+            />
+          </div>
+          <div class="form-row form-row--grow">
+            <label for="data-memo">설명</label>
+            <input type="text" id="data-memo" name="memo" maxlength="500" required />
+          </div>
+          <button type="submit">매출 추가</button>
+        </form>
+
+        <div id="data-list" class="data-list" aria-live="polite">
+          <p class="placeholder">매출 목록을 불러오는 중입니다...</p>
+        </div>
+        <button type="button" id="data-load-more-button" class="secondary-button" hidden>
+          더 보기
+        </button>
+      </section>
+
+      <section id="chat-section" class="panel" aria-labelledby="chat-heading">
+        <h2 id="chat-heading">AI에게 매출 물어보기</h2>
+
+        <div class="chat-layout">
+          <div class="conversation-panel">
+            <div class="conversation-panel-header">
+              <h3>이전 대화</h3>
+              <button type="button" id="new-conversation-button" class="secondary-button">
+                새 대화
+              </button>
+            </div>
+            <ul id="conversation-list" class="conversation-list" aria-label="이전 대화 목록">
+              <li class="placeholder">대화 목록을 불러오는 중입니다...</li>
+            </ul>
+          </div>
+
+          <div class="chat-panel">
+            <div id="chat-log" class="chat-log" aria-live="polite" aria-label="대화 내용">
+              <p class="placeholder">아직 나눈 대화가 없습니다. 아래에 질문을 입력해 보세요.</p>
+            </div>
+
+            <form id="chat-form" class="chat-form" aria-label="AI에게 질문 보내기">
+              <label for="chat-input">질문</label>
+              <textarea
+                id="chat-input"
+                name="message"
+                rows="3"
+                maxlength="1000"
+                placeholder="예) 최근 매출 추세가 어때? (Enter: 보내기, Shift+Enter: 줄바꿈)"
+                required
+              ></textarea>
+              <button type="submit" id="chat-submit-button">질문 보내기</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <p>Codyssey 미니 프로젝트 1-2 · 온라인 쇼핑몰 매출 분석 AI</p>
+    </footer>
+
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/summary.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/chat.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
