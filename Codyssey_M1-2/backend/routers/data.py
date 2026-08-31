@@ -7,6 +7,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from backend.core.deps import get_data_repository
 from backend.repositories.data_repository import (
     DataAlreadyExistsError,
+    DataDateMismatchError,
     DataNotFoundError,
     DataRepository,
 )
@@ -73,6 +74,7 @@ def get_summary(
     "/{data_id}",
     response_model=DataResponse,
     responses={
+        409: {"model": ErrorResponse},
         404: {"model": ErrorResponse},
         422: {"model": ErrorResponse},
         500: {"model": ErrorResponse},
@@ -95,6 +97,11 @@ def update_data(
         raise HTTPException(
             status_code=404,
             detail="수정하려는 매출 데이터를 찾을 수 없습니다.",
+        ) from exc
+    except DataDateMismatchError as exc:
+        raise HTTPException(
+            status_code=409,
+            detail="날짜는 매출 데이터의 식별자이므로 수정할 수 없습니다. 기존 데이터를 삭제한 뒤 새 날짜로 추가해 주세요.",
         ) from exc
     return DataResponse.model_validate(record)
 

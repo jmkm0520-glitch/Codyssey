@@ -3,7 +3,9 @@
 from datetime import date as Date
 from datetime import timedelta
 
-from backend.repositories.data_repository import DataRepository
+import pytest
+
+from backend.repositories.data_repository import DataDateMismatchError, DataRepository
 
 
 class FakeDocRef:
@@ -95,3 +97,15 @@ def test_upsert_many_reports_failed_batches_without_raising() -> None:
     assert result.succeeded == 500
     assert result.failed == 400
     assert len(client.store) == 500
+
+
+def test_update_rejects_date_that_differs_from_document_id() -> None:
+    repository = DataRepository(FakeClient())
+
+    with pytest.raises(DataDateMismatchError):
+        repository.update(
+            "2010-12-01",
+            date=Date(2010, 12, 2),
+            value=1000.0,
+            memo="거래 1건",
+        )

@@ -153,7 +153,7 @@ date,value,memo
   - [x] 3-16 `updated_at`: 수정 시각
 - [x] 3-17 서버가 Firebase에 로그인할 때 사용할 서비스 계정이 있는지 확인한다. (Firebase가 자동으로 만든 Admin SDK 계정 확인)
 - [x] 3-18 서비스 계정의 비밀 열쇠가 들어 있는 JSON 파일을 내려받는다. (사용자 확인)
-- [x] 3-19 비밀 열쇠 파일을 프로젝트 밖이나 Git이 무시하는 곳에 보관한다. (프로젝트 밖, 파일 권한 `600`)
+- [x] 3-19 비밀 열쇠 파일을 프로젝트 밖이나 Git이 무시하는 곳에 보관한다. (`~/.config/codyssey-m1-2/firebase-adminsdk.json`으로 이동, 파일 권한 `600` 및 Firestore 재연결 확인)
 - [x] 3-20 비밀 열쇠 내용을 직접 설정값으로 넣을지, 열쇠 파일의 위치만 알려줄지 정한다. (`FIREBASE_SERVICE_ACCOUNT_PATH` 방식)
 - [x] 3-21 내 컴퓨터의 `.env`에 Firebase 연결 설정을 넣는다. (Git 제외 확인)
 - [x] 3-22 서버가 Firebase에 연결되도록 Firebase Admin SDK를 시작하는 코드를 작성한다. (`backend/core/firebase.py`)

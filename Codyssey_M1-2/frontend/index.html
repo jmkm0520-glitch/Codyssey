@@ -10,33 +10,50 @@
     <a class="skip-link" href="#main-content">본문으로 건너뛰기</a>
 
     <header class="app-header">
-      <h1>온라인 쇼핑몰 매출 분석 AI</h1>
-      <p class="app-description">
-        저장된 날짜별 매출을 확인하고 관리하며, AI에게 매출 흐름을 물어볼 수 있는 업무용 도구입니다.
-      </p>
-      <nav class="app-nav" aria-label="빠른 이동">
-        <a href="#summary-section">매출 요약</a>
-        <a href="#data-section">매출 데이터</a>
-        <a href="#chat-section">AI 채팅</a>
-      </nav>
+      <div class="header-inner">
+        <div class="brand-block">
+          <p class="eyebrow">Sales intelligence workspace</p>
+          <h1>매출의 흐름을 읽는<br /><span>가장 쉬운 방법</span></h1>
+          <p class="app-description">
+            흩어진 일별 매출을 한눈에 정리하고, 궁금한 변화는 AI에게 바로 물어보세요.
+          </p>
+        </div>
+        <nav class="app-nav" aria-label="빠른 이동">
+          <a href="#summary-section"><span>01</span> 매출 요약</a>
+          <a href="#data-section"><span>02</span> 데이터 관리</a>
+          <a href="#chat-section"><span>03</span> AI 분석</a>
+        </nav>
+      </div>
     </header>
 
     <div id="status-banner" class="status-banner" role="status" aria-live="polite" hidden></div>
 
     <main id="main-content">
       <p class="cold-start-notice">
-        무료 서버 특성상 서버가 잠들어 있으면 첫 요청에 최대 1분 정도 걸릴 수 있습니다. 잠시만 기다려 주세요.
+        <strong>첫 방문이신가요?</strong> 무료 서버가 준비되는 동안 첫 요청에 최대 1분 정도 걸릴 수 있어요.
       </p>
 
       <section id="summary-section" class="panel" aria-labelledby="summary-heading">
-        <h2 id="summary-heading">매출 요약</h2>
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Overview</p>
+            <h2 id="summary-heading">매출 요약</h2>
+          </div>
+          <p>핵심 지표와 최근 흐름을 빠르게 확인하세요.</p>
+        </div>
         <div id="summary-content" class="summary-grid" aria-live="polite">
           <p class="placeholder">매출 요약을 불러오는 중입니다...</p>
         </div>
       </section>
 
       <section id="data-section" class="panel" aria-labelledby="data-heading">
-        <h2 id="data-heading">매출 데이터</h2>
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Daily records</p>
+            <h2 id="data-heading">매출 데이터</h2>
+          </div>
+          <p>날짜별 기록을 추가하고 필요한 데이터를 관리하세요.</p>
+        </div>
 
         <form id="data-form" class="data-form" aria-label="새 매출 추가">
           <div class="form-row">
@@ -71,7 +88,13 @@
       </section>
 
       <section id="chat-section" class="panel" aria-labelledby="chat-heading">
-        <h2 id="chat-heading">AI에게 매출 물어보기</h2>
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">AI analyst</p>
+            <h2 id="chat-heading">AI에게 매출 물어보기</h2>
+          </div>
+          <p>숫자 뒤에 숨은 의미를 자연어로 탐색해 보세요.</p>
+        </div>
 
         <div class="chat-layout">
           <div class="conversation-panel">
@@ -101,7 +124,7 @@
                 placeholder="예) 최근 매출 추세가 어때? (Enter: 보내기, Shift+Enter: 줄바꿈)"
                 required
               ></textarea>
-              <button type="submit" id="chat-submit-button">질문 보내기</button>
+              <button type="submit" id="chat-submit-button">AI에게 질문하기 <span aria-hidden="true">↗</span></button>
             </form>
           </div>
         </div>

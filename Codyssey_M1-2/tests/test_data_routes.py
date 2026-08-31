@@ -8,7 +8,11 @@ from fastapi.testclient import TestClient
 
 from backend.core.deps import get_data_repository
 from backend.main import app
-from backend.repositories.data_repository import DataAlreadyExistsError, DataNotFoundError
+from backend.repositories.data_repository import (
+    DataAlreadyExistsError,
+    DataDateMismatchError,
+    DataNotFoundError,
+)
 
 
 class FakeDataRepository:
@@ -38,6 +42,8 @@ class FakeDataRepository:
     def update(self, doc_id: str, *, date: Date, value: float, memo: str) -> dict:
         if doc_id not in self._docs:
             raise DataNotFoundError(doc_id)
+        if date.isoformat() != doc_id:
+            raise DataDateMismatchError(f"{doc_id} != {date.isoformat()}")
 
         record = self._docs[doc_id] | {
             "date": date.isoformat(),
@@ -119,6 +125,18 @@ def test_update_missing_record_returns_404(client: TestClient) -> None:
     assert response.json() == {
         "error": {"code": "HTTP_404", "message": "수정하려는 매출 데이터를 찾을 수 없습니다."}
     }
+
+
+def test_update_rejects_date_change(client: TestClient) -> None:
+    client.post("/api/data", json=payload())
+
+    response = client.put(
+        "/api/data/2010-12-01",
+        json=payload(date="2010-12-02"),
+    )
+
+    assert response.status_code == 409
+    assert response.json()["error"]["message"].startswith("날짜는 매출 데이터의 식별자")
 
 
 def test_delete_removes_record(client: TestClient) -> None:

@@ -31,6 +31,10 @@ class DataAlreadyExistsError(Exception):
     """이미 같은 날짜의 매출 문서가 있을 때 발생한다."""
 
 
+class DataDateMismatchError(Exception):
+    """문서 ID와 수정 요청의 날짜가 다를 때 발생한다."""
+
+
 class DataRepository:
     """`data` 컬렉션에 값을 넣고 가져오는 코드를 한곳에 모은다.
 
@@ -63,13 +67,17 @@ class DataRepository:
         return [{"id": doc.id, **doc.to_dict()} for doc in docs]
 
     def update(self, doc_id: str, *, date: Date, value: float, memo: str) -> dict[str, Any]:
+        requested_doc_id = date.isoformat()
+        if requested_doc_id != doc_id:
+            raise DataDateMismatchError(f"{doc_id} != {requested_doc_id}")
+
         doc_ref = self._collection.document(doc_id)
         snapshot = doc_ref.get()
         if not snapshot.exists:
             raise DataNotFoundError(doc_id)
 
         changes = {
-            "date": date.isoformat(),
+            "date": requested_doc_id,
             "value": value,
             "memo": memo,
             "updated_at": datetime.now(timezone.utc),
