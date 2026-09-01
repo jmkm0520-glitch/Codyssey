@@ -5,8 +5,7 @@
  * 우선순위: localStorage 저장값 > 접속 호스트 기준 자동 판단.
  */
 (function () {
-  // 18단계에서 Render에 배포한 뒤 실제 백엔드 주소로 바꿔 주세요.
-  const PRODUCTION_API_BASE_URL = "https://codyssey-m1-2-api.onrender.com";
+  const PRODUCTION_API_BASE_URL = "https://codyssey-xmy5.onrender.com";
   const LOCAL_API_BASE_URL = "http://localhost:8000";
   const STORAGE_KEY = "apiBaseUrl";
 
