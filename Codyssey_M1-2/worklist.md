@@ -667,27 +667,31 @@ git ls-files Codyssey_M1-2
 - **처음 보는 말:** `Web Service`는 인터넷 요청을 처리하도록 계속 실행되는 서버, `빌드 명령`은 실행 준비에 필요한 설치 명령, `시작 명령`은 서버를 켜는 명령, `배포 로그`는 온라인 실행 과정의 기록이다.
 - **끝났다는 뜻:** Render 주소의 `/health`와 `/docs`가 열리고, 배포된 서버가 Firestore와 OpenAI를 정상적으로 사용한다.
 
-- [ ] 18-1 Render에 가입하고 17단계에서 코드를 올린 GitHub 계정을 연결한다.
-- [ ] 18-2 FastAPI 서버를 실행할 새 Web Service를 만든다.
-- [ ] 18-3 어떤 GitHub 저장소의 어느 폴더를 서버로 사용할지 정한다.
-- [ ] 18-4 Render가 필요한 Python 도구를 설치할 때 실행할 명령을 적는다.
-- [ ] 18-5 Render가 Uvicorn으로 FastAPI 서버를 켤 때 실행할 명령을 적는다.
-- [ ] 18-6 내 컴퓨터와 같은 Python 버전을 사용하도록 정한다.
-- [ ] 18-7 Render의 공개되지 않는 설정 칸에 `OPENAI_API_KEY`를 넣는다.
-- [ ] 18-8 Firebase 서비스 계정 JSON 내용을 Render의 공개되지 않는 설정 칸에 넣는다.
-- [ ] 18-9 어떤 사용자 화면의 요청을 허용할지 `ALLOWED_ORIGINS`에 적는다.
-- [ ] 18-10 사용할 OpenAI 모델 이름과 최대 답변 길이를 Render 설정에 넣는다.
-- [ ] 18-11 Render의 실행 기록을 보고 설치나 서버 시작 오류가 없는지 확인한다.
-- [ ] 18-12 Render가 만든 인터넷 주소 뒤에 `/health`를 붙여 정상 응답을 확인한다.
-- [ ] 18-13 Render 주소 뒤에 `/docs`를 붙여 API 시험 화면이 열리는지 확인한다.
-- [ ] 18-14 배포된 Swagger 화면에서 중요한 API를 직접 시험한다.
-- [ ] 18-15 무료 Render 서버가 잠든 뒤 처음 요청할 때 얼마나 기다려야 하는지 확인한다.
+- [x] 18-1 Render에 가입하고 17단계에서 코드를 올린 GitHub 계정을 연결한다. (사용자 직접 진행)
+- [x] 18-2 FastAPI 서버를 실행할 새 Web Service를 만든다. (서비스명 `Codyssey`, 상태 `Deployed`)
+- [x] 18-3 어떤 GitHub 저장소의 어느 폴더를 서버로 사용할지 정한다.
+- [x] 18-4 Render가 필요한 Python 도구를 설치할 때 실행할 명령을 적는다. (빌드 성공으로 확인)
+- [x] 18-5 Render가 Uvicorn으로 FastAPI 서버를 켤 때 실행할 명령을 적는다. (`/health` 응답으로 확인)
+- [x] 18-6 내 컴퓨터와 같은 Python 버전을 사용하도록 정한다. (Runtime: Python 3)
+- [x] 18-7 Render의 공개되지 않는 설정 칸에 `OPENAI_API_KEY`를 넣는다. (`/api/chat` 실제 응답으로 확인)
+- [x] 18-8 Firebase 서비스 계정 JSON 내용을 Render의 공개되지 않는 설정 칸에 넣는다. (`/api/data/summary`가 실제 Firestore 값을 반환해 확인)
+- [x] 18-9 어떤 사용자 화면의 요청을 허용할지 `ALLOWED_ORIGINS`에 적는다. (`localhost:3000` CORS 허용 확인 — 19단계에서 실제 Vercel 주소 추가 필요)
+- [x] 18-10 사용할 OpenAI 모델 이름과 최대 답변 길이를 Render 설정에 넣는다. (AI가 정상 답변해 확인)
+- [x] 18-11 Render의 실행 기록을 보고 설치나 서버 시작 오류가 없는지 확인한다. (서비스 상태 `Deployed`, 모든 엔드포인트 정상 응답으로 간접 확인 — Render 로그 화면은 직접 보지 못함, 필요하면 대시보드 Logs 탭에서 사용자가 최종 확인)
+- [x] 18-12 Render가 만든 인터넷 주소 뒤에 `/health`를 붙여 정상 응답을 확인한다. (`https://codyssey-xmy5.onrender.com/health` → 200)
+- [x] 18-13 Render 주소 뒤에 `/docs`를 붙여 API 시험 화면이 열리는지 확인한다. (200, 전체 API 경로 노출 확인)
+- [x] 18-14 배포된 Swagger 화면에서 중요한 API를 직접 시험한다. (사용자가 직접 테스트 데이터 추가로 시험, Claude도 `/api/data/summary`·`/api/chat` 직접 호출로 재확인)
+- [x] 18-15 무료 Render 서버가 잠든 뒤 처음 요청할 때 얼마나 기다려야 하는지 확인한다. (콜드스타트 첫 요청 약 43초)
 
 이 단계가 끝났는지 확인하기:
 
 - Render가 만든 인터넷 주소에서 서버가 답한다.
 - Render 주소의 `/docs`에서 API 시험 화면이 열린다.
 - 인터넷에 올린 서버에서도 Firestore 저장과 OpenAI 답변이 작동한다.
+
+배포 주소: `https://codyssey-xmy5.onrender.com`
+
+참고: 사용자가 Swagger로 API를 시험하며 남긴 테스트 데이터(`date=2026-08-18`, `value=0.06`, `memo="123"`)가 실제 Firestore `data` 컬렉션에 남아 있다. 최소 매출·최근 추세 계산에 계속 섞이므로, 정리가 필요하면 `DELETE /api/data/2026-08-18`로 지운다.
 
 ---
 
