@@ -59,6 +59,11 @@ class FakeDataRepository:
             raise DataNotFoundError(doc_id)
         del self._docs[doc_id]
 
+    def get(self, doc_id: str) -> dict:
+        if doc_id not in self._docs:
+            raise DataNotFoundError(doc_id)
+        return self._docs[doc_id]
+
 
 @pytest.fixture
 def client() -> TestClient:
@@ -102,6 +107,33 @@ def test_duplicate_date_is_rejected(client: TestClient) -> None:
 
     assert response.status_code == 409
     assert response.json()["error"]["code"] == "HTTP_409"
+
+
+def test_get_single_record_returns_matching_data(client: TestClient) -> None:
+    client.post("/api/data", json=payload())
+
+    response = client.get("/api/data/2010-12-01")
+
+    assert response.status_code == 200
+    body = response.json()
+    assert body["date"] == "2010-12-01"
+    assert body["value"] == 58635.56
+
+
+def test_get_missing_record_returns_404(client: TestClient) -> None:
+    response = client.get("/api/data/없는-날짜")
+
+    assert response.status_code == 404
+    assert response.json() == {
+        "error": {"code": "HTTP_404", "message": "요청한 매출 데이터를 찾을 수 없습니다."}
+    }
+
+
+def test_get_does_not_shadow_summary_route(client: TestClient) -> None:
+    response = client.get("/api/data/summary")
+
+    assert response.status_code == 200
+    assert "record_count" in response.json()
 
 
 def test_update_changes_value_and_memo(client: TestClient) -> None:

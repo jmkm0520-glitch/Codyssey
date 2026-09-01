@@ -70,6 +70,29 @@ def get_summary(
     return build_summary(records)
 
 
+@router.get(
+    "/{data_id}",
+    response_model=DataResponse,
+    responses={
+        404: {"model": ErrorResponse},
+        500: {"model": ErrorResponse},
+    },
+    summary="매출 단건 조회",
+)
+def get_data(
+    data_id: str,
+    repository: DataRepository = Depends(get_data_repository),
+) -> DataResponse:
+    try:
+        record = repository.get(data_id)
+    except DataNotFoundError as exc:
+        raise HTTPException(
+            status_code=404,
+            detail="요청한 매출 데이터를 찾을 수 없습니다.",
+        ) from exc
+    return DataResponse.model_validate(record)
+
+
 @router.put(
     "/{data_id}",
     response_model=DataResponse,

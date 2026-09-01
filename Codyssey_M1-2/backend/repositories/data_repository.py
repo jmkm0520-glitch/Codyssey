@@ -66,6 +66,12 @@ class DataRepository:
         docs = self._collection.order_by("date").stream()
         return [{"id": doc.id, **doc.to_dict()} for doc in docs]
 
+    def get(self, doc_id: str) -> dict[str, Any]:
+        snapshot = self._collection.document(doc_id).get()
+        if not snapshot.exists:
+            raise DataNotFoundError(doc_id)
+        return {"id": snapshot.id, **snapshot.to_dict()}
+
     def update(self, doc_id: str, *, date: Date, value: float, memo: str) -> dict[str, Any]:
         requested_doc_id = date.isoformat()
         if requested_doc_id != doc_id:
