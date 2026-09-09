@@ -4,6 +4,8 @@
 
 [서비스 접속](https://codyssey-one.vercel.app) · [API 문서·시험(Swagger UI)](https://codyssey-xmy5.onrender.com/docs) · [서버 상태](https://codyssey-xmy5.onrender.com/health)
 
+> Render 무료 서버가 잠든 경우 첫 접속에 최대 1분 정도 걸릴 수 있습니다. 화면의 연결 안내가 사라질 때까지 잠시 기다려 주세요.
+
 ## 무엇을 만들었나?
 
 - **데이터 관리:** 날짜·매출·설명을 추가·삭제하면 Firestore에 반영되고 목록과 요약이 갱신됩니다. 수정은 API에서만 제공합니다.
@@ -12,6 +14,38 @@
 - **모바일 화면:** 좁은 화면은 세로 배치, 640px 이상은 대화 목록과 채팅을 가로 배치합니다.
 
 데이터는 Chen, D. (2015)의 [UCI Online Retail](https://doi.org/10.24432/C5BW33), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)입니다. 2010-12-01~2011-12-09의 영국 소매 거래 541,909행에서 취소·수량/가격 0 이하·필수값 누락을 제외하고, `수량 × 단가`를 날짜별로 합산했습니다. 금액 단위는 **GBP**이며 현재 매출이나 미래 예측을 제공하는 서비스는 아닙니다.
+
+## 평가자용 빠른 확인
+
+| 필수 평가 항목 | 구현 결과 | 확인 위치 |
+| --- | --- | --- |
+| 100개 이상 시계열·요약 | UCI 541,909행을 일별 매출 305건으로 전처리하고 기간·합계·평균·최대/최소·추세 계산 | [`data/daily_sales.csv`](data/daily_sales.csv), `GET /api/data/summary` |
+| 데이터 CRUD | 생성·목록·단건·수정·삭제 API, 화면의 추가·삭제 | 배포 화면 **매출 데이터**, Swagger **매출 데이터** |
+| 데이터 기반 AI 채팅 | 저장된 요약을 시스템 프롬프트에 주입하고 AI 답변 생성, 로딩·오류 표시 | 배포 화면 **AI에게 매출 물어보기**, `POST /api/chat` |
+| 대화 기록 | 질문·답변 자동 저장, 목록·상세 조회·이어하기·삭제 | 배포 화면 **이전 대화**, `/api/conversations` |
+| 배포·문서화 | Vercel 프론트, Render 백엔드, Swagger, 로컬 실행·환경변수 안내 | README 맨 위 링크, [실행과 확인](#실행과-확인) |
+
+### 권장 시연 순서
+
+1. [서비스](https://codyssey-one.vercel.app)에서 기간·건수·총매출·최대/최소·추세 카드가 보이는지 확인합니다.
+2. `최근 매출 추세가 어때?`를 묻고, 로딩 후 요약 숫자를 근거로 한 한국어 답변이 나오는지 확인합니다.
+3. 기존에 없는 날짜로 임시 매출을 추가해 목록과 요약이 갱신되는지 본 뒤, 같은 항목을 삭제해 공용 데이터를 복구합니다.
+4. **이전 대화**에서 방금 생성된 대화를 선택해 질문·답변이 다시 표시되는지 확인합니다.
+5. [Swagger UI](https://codyssey-xmy5.onrender.com/docs)에서 아래 전체 API와 입력 검증 스키마를 확인합니다.
+
+## 제출 화면
+
+**데이터 요약을 근거로 답하는 AI 채팅**
+
+![매출 요약 카드와 요약 수치를 근거로 답한 AI 채팅](screenshots/dashboard-and-chat.png)
+
+**저장된 이전 대화 목록과 대화 불러오기**
+
+![이전 대화를 선택해 질문과 AI 답변을 다시 표시한 화면](screenshots/conversation-history.png)
+
+**새 매출을 저장한 뒤 목록이 갱신된 데이터 관리**
+
+![매출 추가 폼과 방금 추가한 일별 매출 항목](screenshots/data-add.png)
 
 ## 구조와 핵심 개념
 
@@ -64,7 +98,20 @@ Firestore의 **컬렉션은 문서 묶음**, **문서는 필드로 구성된 저
 | 질문 전송 | `isSending`으로 입력·전송을 잠그고 로딩을 표시합니다. 성공하면 `currentConversationId`에 반환된 ID를 저장하고 대화 목록을 갱신합니다. |
 | 대화 불러오기·새 대화 | 선택한 ID로 상세 메시지를 읽고 다음 질문에도 그 ID를 보냅니다. 새 대화는 ID를 `null`로 하고 화면만 비우며 기존 기록은 유지합니다. |
 
-주요 API는 `/api/data`(매출), `/api/data/summary`(요약), `/api/chat`(답변·자동 저장), `/api/conversations`(대화 저장·목록), `/api/conversations/{id}`(불러오기·삭제)입니다. **Swagger UI**는 요청·응답 형식을 보고 API를 직접 시험하는 문서 화면입니다. 매출 추가 후 새로고침해 저장 여부를 보고, 요약의 최대 금액·날짜와 AI 답변을 비교하고, 이전 대화를 다시 열어 메시지가 유지되는지 확인할 수 있습니다.
+### 전체 API
+
+| 방식 | 경로 | 역할 |
+| --- | --- | --- |
+| `GET` | `/health` | 서버 상태 확인 |
+| `GET` | `/api` | API 기본 정보 |
+| `POST` / `GET` | `/api/data` | 매출 생성 / 목록 조회 |
+| `GET` | `/api/data/summary` | 기본 통계·최근 추세 요약 |
+| `GET` / `PUT` / `DELETE` | `/api/data/{id}` | 매출 단건 조회 / 수정 / 삭제 |
+| `POST` / `GET` | `/api/conversations` | 대화 직접 생성 / 목록 조회 |
+| `GET` / `DELETE` | `/api/conversations/{id}` | 전체 메시지 불러오기 / 삭제 |
+| `POST` | `/api/chat` | 요약 기반 AI 답변·대화 자동 저장 |
+
+**Swagger UI**에서 각 API의 요청·응답 형식과 200·201·204·404·422 등의 상태 코드를 확인하고 직접 시험할 수 있습니다.
 
 ## 배포·보안·확장 시 알아둘 점
 
@@ -86,6 +133,7 @@ Firestore의 **컬렉션은 문서 묶음**, **문서는 필드로 구성된 저
 
 | 용도 | 명령 |
 | --- | --- |
+| 설정 파일 준비 | `cp .env.example .env` 후 빈 값 입력 |
 | 가상환경·의존성 | `python3 -m venv .venv`, `source .venv/bin/activate`, `pip install -r requirements.txt` |
 | 백엔드 실행 | `uvicorn backend.main:app --reload` |
 | 프론트 실행(별도 터미널) | `python3 -m http.server 3000 --directory frontend` → `http://localhost:3000` 접속 |
@@ -94,6 +142,6 @@ Firestore의 **컬렉션은 문서 묶음**, **문서는 필드로 구성된 저
 | 원본 재가공(선택) | `python scripts/preprocess_sales.py` — 로컬 원본 XLSX에서 `data/daily_sales.csv` 생성 |
 | 자동 테스트 | `pytest -q` — 스키마·CRUD·요약·대화·AI 오류 흐름 검증 |
 
-테스트는 가짜 저장소·AI를 사용하므로 실제 배포 연결은 별도로 확인해야 합니다. 개발용 고정 답변은 `USE_MOCK_AI=true`로 켤 수 있고 `ENVIRONMENT=production`에서는 무시됩니다.
+테스트는 가짜 저장소·AI를 사용하므로 실제 배포 연결은 별도로 확인해야 합니다. 2026-09-09 기준 **91개 테스트가 모두 통과**했습니다. 개발용 고정 답변은 `USE_MOCK_AI=true`로 켤 수 있고 `ENVIRONMENT=production`에서는 무시됩니다.
 
 [화면 예시](screenshots/dashboard-and-chat.png) · [대화 불러오기](screenshots/conversation-history.png) · [데이터 추가](screenshots/data-add.png) · [Firebase 학습 노트](docs/learning-note-stage-3-firestore.md)
