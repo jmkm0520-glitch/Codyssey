@@ -1,0 +1,9 @@
+# Runtime dependencies
+supabase==2.31.0
+pydantic==2.13.4
+email-validator==2.3.0
+
+# Development and test dependencies
+pytest==8.4.2
+pytest-asyncio==1.4.0
+ruff==0.15.22

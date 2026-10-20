@@ -1,0 +1,33 @@
+{
+  "name": "diet",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "dev:vercel": "./scripts/vercel-dev.sh",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "test": "node --experimental-strip-types --test src/services/date.test.ts src/services/spreadsheetImport.test.ts src/components/mealCardState.test.ts src/components/statsChart.test.ts src/components/weeklySummary.test.ts src/components/calendarGrid.test.ts src/components/calendarDetailState.test.ts src/components/calendarNavigation.test.ts src/components/calendarDetailClose.test.ts src/components/calendarAccessibility.test.ts",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "security:check": "python3 scripts/security_check.py"
+  },
+  "dependencies": {
+    "next": "16.3.0",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.0",
+    "eslint-config-prettier": "10.1.8",
+    "prettier": "3.9.6",
+    "typescript": "^5"
+  },
+  "packageManager": "pnpm@^11.0.0"
+}

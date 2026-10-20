@@ -1,0 +1,275 @@
+.main {
+  width: min(100% - 48px, 1680px);
+  min-height: calc(100vh - 48px);
+  margin: 24px auto;
+  overflow: hidden;
+  border: 1px solid #e8ddc7;
+  border-radius: 42px;
+  background: #faf4e8;
+  color: #2b2620;
+}
+.main :where(a, button, input):focus-visible {
+  outline: 3px solid #1672d3;
+  outline-offset: 3px;
+}
+.headerActions {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 16px;
+}
+.siteHeader {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  min-height: 130px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 22px 52px;
+  border-bottom: 1px solid #e8ddc7;
+  background: #fffaf0;
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  color: #2b2620;
+  font-size: clamp(1.35rem, 2vw, 2rem);
+  font-weight: 800;
+  letter-spacing: -0.07em;
+  text-decoration: none;
+}
+.brandMark {
+  width: 52px;
+  height: 52px;
+  border-radius: 17px;
+  object-fit: contain;
+}
+.content {
+  width: min(100% - 64px, 980px);
+  margin: 0 auto;
+  padding: 64px 0 80px;
+}
+.eyebrow {
+  margin: 0 0 10px;
+  color: #2f8f63;
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+}
+.content h1 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  letter-spacing: -0.08em;
+}
+.lead {
+  max-width: 760px;
+  margin: 16px 0 30px;
+  color: #8a8271;
+  font-size: 1.12rem;
+  line-height: 1.65;
+}
+.mapping {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.mapping strong,
+.mapping span {
+  border: 1px solid #d7d5cb;
+  border-radius: 999px;
+  background: #fffaf0;
+  padding: 9px 13px;
+  font-size: 0.92rem;
+}
+.mapping strong {
+  border-color: #2f8f63;
+  background: #e2f5ec;
+  color: #2f8f63;
+}
+.dropzone {
+  display: grid;
+  min-height: 190px;
+  place-content: center;
+  border: 2px dashed #75a38b;
+  border-radius: 30px;
+  background: #fffaf0;
+  text-align: center;
+  cursor: pointer;
+}
+.dropzone:hover,
+.dropzone:focus-within {
+  border-color: #2f8f63;
+  background: #f4faf6;
+}
+.dropzone span {
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+.dropzone small {
+  margin-top: 8px;
+  color: #8a8271;
+}
+.dropzone input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+.preview {
+  margin-top: 28px;
+  border-radius: 30px;
+  background: #fffaf0;
+  padding: 30px;
+  box-shadow: 0 12px 36px rgb(43 38 32 / 7%);
+}
+.preview h2,
+.preview p {
+  margin: 0;
+}
+.preview > div:first-child p {
+  margin-top: 7px;
+  color: #8a8271;
+}
+.errors {
+  margin-top: 20px;
+  border-radius: 18px;
+  background: #fdece6;
+  padding: 18px;
+  color: #b6503e;
+}
+.errors p {
+  margin-top: 8px;
+}
+.tableWrap {
+  margin-top: 24px;
+  overflow-x: auto;
+}
+.tableWrap table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.tableWrap th,
+.tableWrap td {
+  border-bottom: 1px solid #e5e2d9;
+  padding: 12px;
+  text-align: left;
+}
+.tableWrap th {
+  color: #8a8271;
+  font-size: 0.86rem;
+}
+.tableWrap > p {
+  margin-top: 10px;
+  color: #8a8271;
+  text-align: right;
+}
+.importButton {
+  width: 100%;
+  margin-top: 24px;
+  border: 0;
+  border-radius: 18px;
+  background: #2f8f63;
+  padding: 17px;
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-size: 1.08rem;
+  font-weight: 800;
+}
+.importButton:hover:not(:disabled),
+.importButton:focus-visible:not(:disabled) {
+  background: #24734f;
+}
+.importButton:active:not(:disabled) {
+  transform: scale(0.98);
+}
+.importButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+.message {
+  margin-top: 16px !important;
+  color: #2f8f63;
+  font-weight: 800;
+  text-align: center;
+}
+@media (max-width: 760px) {
+  .main {
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+  }
+  .siteHeader {
+    min-height: auto;
+    align-items: flex-start;
+    padding: 10px 16px;
+  }
+  .brand span {
+    display: none;
+  }
+  .brandMark {
+    width: 42px;
+    height: 42px;
+  }
+  .content {
+    width: min(100% - 32px, 980px);
+    padding: 42px 0;
+  }
+  .preview {
+    padding: 20px;
+  }
+}
+
+/* Shared visual language for the import flow. */
+.main { border-color: var(--color-border); border-radius: 20px; background: #fff; color: var(--color-text); box-shadow: 0 24px 72px rgb(23 34 30 / 8%); }
+.siteHeader { min-height: 82px; padding: 16px 32px; border-color: var(--color-border); background: rgb(255 255 255 / 94%); }
+.brand { gap: 11px; color: var(--color-text); font-size: 1.1rem; }
+.brandMark { width: 34px; height: 34px; border-radius: 9px; filter: saturate(.55) contrast(1.08); }
+.content { max-width: 920px; padding: 48px 0 64px; }
+.eyebrow { color: var(--color-green-700); letter-spacing: .08em; }
+.content h1 { color: var(--color-text); letter-spacing: -.065em; }
+.lead, .dropzone small, .preview > div:first-child p, .tableWrap th, .tableWrap > p { color: var(--color-text-muted); }
+.dropzone { min-height: 220px; border-color: #8ab7a5; border-radius: 14px; background: #f8faf9; }
+.dropzone:hover, .dropzone:focus-within { border-color: var(--color-green-700); background: var(--color-green-100); }
+.preview { border: 1px solid var(--color-border); border-radius: 14px; box-shadow: none; }
+.importButton { border-radius: 10px; background: var(--color-green-700); }
+.importButton:hover:not(:disabled), .importButton:focus-visible:not(:disabled) { background: var(--color-green-800); }
+@media (max-width: 760px) { .main { border-radius: 0; box-shadow: none; } .siteHeader { min-height: 64px; padding: 10px 16px; } .brandMark { width: 32px; height: 32px; } }
+
+/* Cobalt ledger variant for importing past records. */
+.main { border: 2px solid var(--color-text); border-radius: 0; background: #fdfdff; box-shadow: 10px 10px 0 var(--color-green-700); }
+.siteHeader { min-height: 74px; padding: 12px 24px; border-color: var(--color-text); border-width: 0 0 2px; background: #fdfdff; }
+.brand { font-weight: 900; }
+.brandMark { border-radius: 0; filter: grayscale(1) contrast(1.45); }
+.content h1 { font-weight: 900; }
+.eyebrow { color: var(--color-green-700); }
+.mapping strong, .mapping span { border-color: var(--color-text); border-radius: 0; background: #fdfdff; }
+.mapping strong { border-color: var(--color-green-700); background: var(--color-green-700); color: #fff; }
+.dropzone { border-color: var(--color-text); border-radius: 0; background: #fdfdff; }
+.dropzone:hover, .dropzone:focus-within { border-color: var(--color-green-700); background: var(--color-green-100); }
+.preview { border: 2px solid var(--color-text); border-radius: 0; background: #fdfdff; }
+.importButton { border: 1px solid var(--color-text); border-radius: 0; background: var(--color-text); }
+.importButton:hover:not(:disabled), .importButton:focus-visible:not(:disabled) { background: var(--color-green-700); }
+@media (max-width: 760px) { .main { border: 0; box-shadow: none; } .siteHeader { padding: 10px 16px; border-bottom-width: 1px; } }
+
+/* Garden diary styling for importing existing notes. */
+.main { border: 1px solid #c7ddbb; border-radius: 30px; background: #fffef9; box-shadow: 0 18px 52px rgb(43 101 55 / 12%); }
+.siteHeader { min-height: 82px; padding: 15px 28px; border-color: var(--color-border); border-width: 0 0 1px; background: #fffef9; }
+.brand { color: var(--color-green-800); font-weight: 900; }
+.brandMark { border-radius: 13px; filter: none; }
+.content h1 { color: var(--color-green-800); }
+.eyebrow { color: var(--color-green-700); }
+.mapping strong, .mapping span { border: 0; border-radius: 999px; background: #edf5e8; }
+.mapping strong { background: var(--color-green-700); color: #fff; }
+.dropzone { border-color: #9dcb9f; border-radius: 22px; background: #f8fcf3; }
+.dropzone:hover, .dropzone:focus-within { border-color: var(--color-green-700); background: var(--color-green-100); }
+.preview { border: 1px solid var(--color-border); border-radius: 22px; background: #fffef9; }
+.importButton { border: 0; border-radius: 14px; background: var(--color-green-700); }
+.importButton:hover:not(:disabled), .importButton:focus-visible:not(:disabled) { background: var(--color-green-800); }
+@media (max-width: 760px) { .main { border: 0; border-radius: 0; box-shadow: none; } .siteHeader { min-height: 64px; padding: 10px 16px; } .brandMark { border-radius: 11px; } }

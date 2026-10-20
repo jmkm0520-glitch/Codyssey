@@ -1,0 +1,860 @@
+.center {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: #faf4e8;
+  color: #2b2620;
+}
+.card {
+  width: min(100%, 440px);
+  padding: 48px 44px;
+  border-radius: 32px;
+  background: #fffaf0;
+  border: 1px solid #f2e8d4;
+  box-shadow: 0 24px 70px rgba(43, 38, 32, 0.1);
+}
+.logoMark {
+  display: block;
+  margin: 0 0 20px;
+  border-radius: 20px;
+  object-fit: contain;
+}
+.eyebrow {
+  color: #2f8f63;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+.card h1 {
+  margin: 10px 0 8px;
+  font-size: 32px;
+  letter-spacing: -0.03em;
+}
+.card > p {
+  margin: 0 0 30px;
+  color: #8a8271;
+  line-height: 1.6;
+}
+.form {
+  display: grid;
+  gap: 18px;
+}
+.form label {
+  display: grid;
+  gap: 7px;
+  font-size: 14px;
+  font-weight: 700;
+}
+.form input {
+  width: 100%;
+  border: 1px solid #e6ddc9;
+  border-radius: 14px;
+  background: #faf7ef;
+  padding: 14px 16px;
+  font: inherit;
+}
+.form input:focus {
+  outline: 3px solid rgba(47, 143, 99, 0.18);
+  border-color: #2f8f63;
+  background: #fffaf0;
+}
+.form button {
+  border: 0;
+  border-radius: 14px;
+  padding: 15px;
+  background: #2f8f63;
+  color: white;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+.form button:hover:not(:disabled) {
+  background: #24734f;
+}
+.form button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+.form button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+.error {
+  margin: 0;
+  color: #b23d2e;
+  font-size: 14px;
+}
+.status {
+  margin: 0;
+  color: #24734f;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.switch {
+  width: 100%;
+  margin-top: 16px;
+  border: 0;
+  background: transparent;
+  color: #2f8f63;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+.switch:hover,
+.switch:focus-visible {
+  text-decoration: underline;
+}
+.menuButton {
+  display: grid;
+  width: 50px;
+  height: 50px;
+  flex: 0 0 auto;
+  place-content: center;
+  gap: 5px;
+  border: 1px solid #e8ddc7;
+  border-radius: 15px;
+  background: #fffaf0;
+  box-shadow: 0 6px 20px rgba(43, 38, 32, 0.08);
+  cursor: pointer;
+}
+.menuButton:hover {
+  border-color: #2f8f63;
+  box-shadow: 0 8px 24px rgba(43, 38, 32, 0.14);
+}
+.menuButton span {
+  display: block;
+  width: 21px;
+  height: 2px;
+  border-radius: 999px;
+  background: #2f4f3e;
+}
+.menuButton:focus-visible {
+  outline: 3px solid #1672d3;
+  outline-offset: 3px;
+}
+.menuBackdrop {
+  position: fixed;
+  z-index: 90;
+  inset: 0;
+  border: 0;
+  background: rgba(43, 38, 32, 0.38);
+  cursor: default;
+}
+.sideMenu {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  right: 0;
+  display: flex;
+  width: min(88vw, 380px);
+  height: 100dvh;
+  flex-direction: column;
+  background: #fffaf0;
+  padding: 28px;
+  box-shadow: -18px 0 60px rgba(43, 38, 32, 0.16);
+  color: #2b2620;
+}
+.sideMenuHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #ede2c9;
+}
+.sideMenuHeader div {
+  display: grid;
+  gap: 6px;
+}
+.sideMenuHeader span {
+  color: #8a8271;
+  font-size: 13px;
+  font-weight: 700;
+}
+.sideMenuHeader strong {
+  font-size: 21px;
+  letter-spacing: -0.04em;
+}
+.sideMenuHeader button {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  place-items: center;
+  border: 1px solid #e8ddc7;
+  border-radius: 13px;
+  background: transparent;
+  color: #405039;
+  cursor: pointer;
+  font: inherit;
+  font-size: 28px;
+  line-height: 1;
+}
+.sideMenuHeader button:hover {
+  border-color: #2f8f63;
+  color: #2f8f63;
+}
+.sideMenuNav {
+  display: grid;
+  gap: 10px;
+  padding: 24px 0;
+}
+.sideMenuNav a {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border: 1px solid #dbe8dd;
+  border-radius: 18px;
+  background: #faf4e8;
+  padding: 17px;
+  color: #2b2620;
+  text-decoration: none;
+}
+.sideMenuNav a:hover,
+.sideMenuNav a:focus-visible {
+  border-color: #bfe0c9;
+  background: #e2f5ec;
+}
+.sideMenuNav a > span:first-child {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+  place-items: center;
+  border-radius: 12px;
+  background: #e2f5ec;
+  color: #2f8f63;
+  font-size: 22px;
+  font-weight: 800;
+}
+.sideMenuNav a > span:nth-child(2) {
+  display: grid;
+  flex: 1;
+  gap: 3px;
+}
+.sideMenuNav strong {
+  font-size: 16px;
+}
+.sideMenuNav small {
+  color: #8a8271;
+  font-size: 12px;
+}
+.sideMenuNav b {
+  color: #2f8f63;
+  font-size: 24px;
+}
+.logoutButton {
+  margin-top: auto;
+  border: 1px solid #e2624f;
+  border-radius: 16px;
+  background: #fdf1ea;
+  padding: 14px;
+  color: #b6503e;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+}
+.logoutButton:hover,
+.logoutButton:focus-visible {
+  background: #fdece6;
+}
+.logoutButton:active {
+  transform: scale(0.98);
+}
+.sideMenu :where(a, button):focus-visible {
+  outline: 3px solid #1672d3;
+  outline-offset: 3px;
+}
+@media (max-width: 760px) {
+  .menuButton {
+    width: 44px;
+    height: 44px;
+    border-radius: 13px;
+  }
+  .sideMenu {
+    padding: 22px 20px calc(22px + env(safe-area-inset-bottom));
+  }
+}
+@media (max-width: 520px) {
+  .card {
+    padding: 32px 26px;
+  }
+}
+
+/* Authentication and account controls share the quiet app palette. */
+.center {
+  background: #eef1ef;
+  color: var(--color-text);
+}
+.card {
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 24px 72px rgb(23 34 30 / 10%);
+}
+.logoMark {
+  border-radius: 10px;
+  filter: saturate(0.55) contrast(1.08);
+}
+.eyebrow,
+.status {
+  color: var(--color-green-700);
+}
+.card > p,
+.sideMenuHeader span,
+.sideMenuNav small {
+  color: var(--color-text-muted);
+}
+.form input {
+  border-color: var(--color-border);
+  border-radius: 9px;
+  background: #f8faf9;
+}
+.form input:focus {
+  border-color: var(--color-green-700);
+  background: #fff;
+  outline-color: rgb(23 107 77 / 16%);
+}
+.form button {
+  border-radius: 10px;
+  background: var(--color-green-700);
+}
+.form button:hover:not(:disabled) {
+  background: var(--color-green-800);
+}
+.switch {
+  color: var(--color-green-700);
+}
+.menuButton {
+  width: 42px;
+  height: 42px;
+  border-color: var(--color-border);
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: none;
+}
+.menuButton:hover {
+  border-color: var(--color-green-700);
+  box-shadow: none;
+}
+.menuButton span {
+  background: var(--color-text);
+}
+.menuBackdrop {
+  background: rgb(12 29 22 / 42%);
+}
+.sideMenu {
+  background: #fff;
+  color: var(--color-text);
+  box-shadow: -18px 0 60px rgb(23 34 30 / 16%);
+}
+.sideMenuHeader {
+  border-color: var(--color-border);
+}
+.sideMenuHeader button {
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+.sideMenuNav a {
+  border-color: var(--color-border);
+  border-radius: 12px;
+  background: #f8faf9;
+  color: var(--color-text);
+}
+.sideMenuNav a:hover,
+.sideMenuNav a:focus-visible {
+  border-color: #a9cfbe;
+  background: var(--color-green-100);
+}
+.sideMenuNav a > span:first-child {
+  border-radius: 8px;
+  background: var(--color-green-100);
+  color: var(--color-green-800);
+}
+.sideMenuNav b {
+  color: var(--color-green-700);
+}
+.logoutButton {
+  border-color: #e5aaa2;
+  border-radius: 10px;
+  background: #fff7f6;
+  color: #a33f36;
+}
+
+/* Cobalt ledger authentication. */
+.center {
+  background: #e8ecf7;
+}
+.card {
+  border: 2px solid var(--color-text);
+  border-radius: 0;
+  box-shadow: 10px 10px 0 var(--color-green-700);
+}
+.logoMark {
+  border-radius: 0;
+  filter: grayscale(1) contrast(1.45);
+}
+.form input {
+  border-color: var(--color-text);
+  border-radius: 0;
+}
+.form button {
+  border: 1px solid var(--color-text);
+  border-radius: 0;
+  background: var(--color-text);
+}
+.form button:hover:not(:disabled) {
+  background: var(--color-green-700);
+}
+.switch {
+  color: var(--color-green-700);
+}
+.menuButton {
+  border-color: var(--color-text);
+  border-radius: 0;
+}
+.menuButton:hover {
+  border-color: var(--color-green-700);
+  background: var(--color-green-100);
+}
+.sideMenu {
+  border-left: 2px solid var(--color-text);
+  background: #fdfdff;
+}
+.sideMenuNav a {
+  border-color: var(--color-text);
+  border-radius: 0;
+  background: #fdfdff;
+}
+.sideMenuNav a:hover,
+.sideMenuNav a:focus-visible {
+  border-color: var(--color-green-700);
+  background: var(--color-green-100);
+}
+.sideMenuNav a > span:first-child {
+  border-radius: 0;
+}
+.logoutButton {
+  border-color: var(--color-red-600);
+  border-radius: 0;
+}
+
+/* Friendly garden companion styling for account screens. */
+.center {
+  background: #eaf3df;
+}
+.card {
+  border: 1px solid #c7ddbb;
+  border-radius: 26px;
+  background: #fffef9;
+  box-shadow: 0 18px 52px rgb(43 101 55 / 12%);
+}
+.logoMark {
+  border-radius: 14px;
+  filter: none;
+}
+.form input {
+  border-color: #d8e7d3;
+  border-radius: 12px;
+  background: #f8fbf5;
+}
+.form button {
+  border: 0;
+  border-radius: 13px;
+  background: var(--color-green-700);
+}
+.form button:hover:not(:disabled) {
+  background: var(--color-green-800);
+}
+.switch {
+  color: var(--color-green-700);
+}
+.menuButton {
+  border-color: #c7ddbb;
+  border-radius: 14px;
+  background: #fffef9;
+}
+.menuButton:hover {
+  border-color: var(--color-green-700);
+  background: var(--color-green-100);
+}
+.sideMenu {
+  border-left: 0;
+  background: #fffef9;
+}
+.sideMenuNav a {
+  border-color: var(--color-border);
+  border-radius: 16px;
+  background: #f8fcf3;
+}
+.sideMenuNav a:hover,
+.sideMenuNav a:focus-visible {
+  border-color: #a9d6ad;
+  background: var(--color-green-100);
+}
+.sideMenuNav a > span:first-child {
+  border-radius: 10px;
+}
+.logoutButton {
+  border-color: #f1b2a6;
+  border-radius: 12px;
+}
+
+/* Sign-in screen shares the diary's soft garden surface and compact controls. */
+.center {
+  position: relative;
+  isolation: isolate;
+  min-height: 100dvh;
+  overflow: hidden;
+  padding: 40px 24px;
+  background:
+    radial-gradient(circle at 15% 16%, rgb(190 227 183 / 62%) 0 104px, transparent 105px),
+    radial-gradient(circle at 86% 86%, rgb(255 230 157 / 48%) 0 142px, transparent 143px),
+    linear-gradient(135deg, #edf8e8 0%, #f8fcf3 50%, #fff9e6 100%);
+}
+.center::before,
+.center::after {
+  position: absolute;
+  z-index: -1;
+  border-radius: 999px;
+  background: rgb(95 154 105 / 13%);
+  content: "";
+}
+.center::before {
+  width: 320px;
+  height: 320px;
+  top: -168px;
+  right: -92px;
+}
+.center::after {
+  width: 220px;
+  height: 220px;
+  bottom: -120px;
+  left: -72px;
+}
+.card {
+  width: min(100%, 454px);
+  padding: 40px;
+  border: 1px solid rgb(201 223 195 / 95%);
+  border-radius: 24px;
+  background: rgb(255 254 249 / 94%);
+  box-shadow: 0 20px 54px rgb(43 101 55 / 14%);
+  backdrop-filter: blur(12px);
+}
+.logoMark {
+  width: 52px;
+  height: 52px;
+  margin-bottom: 16px;
+  border-radius: 16px;
+}
+.eyebrow {
+  color: #34724c;
+  font-size: 0.88rem;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+}
+.card h1 {
+  margin: 7px 0 10px;
+  color: #225f3d;
+  font-size: 2rem;
+  letter-spacing: -0.075em;
+}
+.card > p {
+  margin-bottom: 28px;
+  color: #607b68;
+  font-size: 0.96rem;
+  line-height: 1.65;
+}
+.form {
+  gap: 15px;
+}
+.form label {
+  gap: 8px;
+  color: #315b41;
+  font-size: 0.86rem;
+}
+.form input {
+  min-height: 50px;
+  border-color: #d4e5d0;
+  border-radius: 12px;
+  background: #f9fcf6;
+  padding: 13px 14px;
+}
+.form input:focus {
+  border-color: #4d9660;
+  outline: 3px solid rgb(98 187 123 / 20%);
+}
+.form button {
+  min-height: 50px;
+  margin-top: 4px;
+  border-radius: 12px;
+  background: #28784c;
+  box-shadow: 0 7px 14px rgb(40 120 76 / 20%);
+}
+.form button:hover:not(:disabled) {
+  background: #1f6740;
+}
+.form button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+.switch {
+  margin-top: 18px;
+  color: #34724c;
+  font-size: 0.92rem;
+}
+.error,
+.status {
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+}
+.error {
+  background: #fff0ed;
+}
+.status {
+  background: #eaf7e9;
+}
+@media (max-width: 520px) {
+  .center {
+    place-items: start center;
+    padding: 28px 16px;
+  }
+  .card {
+    padding: 30px 24px;
+    border-radius: 20px;
+  }
+  .card h1 {
+    font-size: 1.75rem;
+  }
+}
+
+/* Auth is a single, calm entry screen for the diary rather than a floating modal. */
+.center {
+  display: grid;
+  place-items: center;
+  padding: 32px;
+  background: #edf6e9;
+}
+.center::before,
+.center::after {
+  display: none;
+}
+.authShell {
+  display: grid;
+  grid-template-columns: minmax(300px, 1.1fr) minmax(360px, 0.9fr);
+  width: min(100%, 940px);
+  min-height: 560px;
+  overflow: hidden;
+  border: 1px solid #d6e6d2;
+  border-radius: 22px;
+  background: #fffef9;
+  box-shadow: 0 24px 64px rgb(36 91 57 / 13%);
+}
+.authIntro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  padding: 58px;
+  background: linear-gradient(145deg, #4d9063 0%, #34784d 100%);
+  color: #fffef9;
+}
+.authIntro img {
+  width: 72px;
+  height: 72px;
+  margin-bottom: 26px;
+  border-radius: 22px;
+  background: #fffef9;
+  padding: 8px;
+  object-fit: contain;
+}
+.authIntro p {
+  margin: 0 0 8px;
+  color: #e2f1e4;
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+.authIntro h2 {
+  margin: 0;
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  letter-spacing: -0.09em;
+  line-height: 1.2;
+}
+.authIntro > span {
+  margin-top: 22px;
+  color: #d9ecdd;
+  font-size: 0.98rem;
+  line-height: 1.7;
+}
+.card {
+  width: auto;
+  align-self: center;
+  padding: 52px 48px;
+  border: 0;
+  border-radius: 0;
+  background: #fffef9;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+.cardBrand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.logoMark {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+  margin: 0;
+  border-radius: 9px;
+}
+.eyebrow {
+  color: #2c7046;
+  font-size: 0.84rem;
+}
+.card h1 {
+  margin: 2px 0 9px;
+  color: #244d35;
+  font-size: 1.85rem;
+  letter-spacing: -0.075em;
+}
+.card > p {
+  margin-bottom: 30px;
+  color: #6a8170;
+  font-size: 0.92rem;
+  line-height: 1.65;
+}
+.form {
+  gap: 16px;
+}
+.form label {
+  color: #345841;
+  font-size: 0.82rem;
+}
+.form input {
+  min-height: 48px;
+  border-color: #d5e3d2;
+  border-radius: 10px;
+  background: #f9fcf7;
+}
+.form button {
+  min-height: 48px;
+  margin-top: 4px;
+  border-radius: 10px;
+  background: #34784d;
+  box-shadow: none;
+}
+.form button:hover:not(:disabled) {
+  background: #26643c;
+}
+.switch {
+  margin-top: 16px;
+  color: #34784d;
+  font-size: 0.87rem;
+}
+@media (max-width: 720px) {
+  .center {
+    place-items: start center;
+    padding: 0;
+  }
+  .authShell {
+    grid-template-columns: 1fr;
+    min-height: 100dvh;
+    border: 0;
+    border-radius: 0;
+  }
+  .authIntro {
+    min-height: 240px;
+    padding: 34px 28px;
+  }
+  .authIntro img {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 16px;
+    border-radius: 15px;
+  }
+  .authIntro h2 {
+    font-size: 1.85rem;
+  }
+  .authIntro > span {
+    display: none;
+  }
+  .card {
+    padding: 30px 28px calc(36px + env(safe-area-inset-bottom));
+  }
+  .card h1 {
+    margin-top: 2px;
+  }
+}
+
+.targetWeightMenu {
+  border-top: 1px solid #dce8d7;
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 16px 4px 4px;
+}
+
+.targetWeightMenuEyebrow {
+  color: #78906d;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  margin: 0 0 3px;
+}
+
+.targetWeightMenu h2 {
+  color: #244b34;
+  font-size: 1rem;
+  margin: 0;
+}
+.targetWeightMenuLabel {
+  color: #59715e;
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.targetWeightMenuInputRow {
+  align-items: center;
+  display: grid;
+  gap: 6px;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+}
+
+.targetWeightMenuInputRow input {
+  background: #fff;
+  border: 1px solid #cbdcc8;
+  border-radius: 10px;
+  color: #244b34;
+  font: inherit;
+  font-weight: 800;
+  min-width: 0;
+  padding: 9px 10px;
+}
+
+.targetWeightMenuInputRow span {
+  color: #47604e;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.targetWeightMenuInputRow button {
+  background: #4d805d;
+  border: 0;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 10px 12px;
+}
+
+.targetWeightMenuInputRow button:hover {
+  background: #3d6d4c;
+}
+.targetWeightMenuError {
+  color: #bd5c43;
+  font-size: 0.72rem;
+  font-weight: 700;
+  margin: 0;
+}

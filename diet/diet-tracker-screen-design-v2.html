@@ -1,0 +1,210 @@
+<style>
+  #diet-screen-design {
+    --diet-bg: light-dark(#f5f1e8, #171814);
+    --diet-surface: light-dark(#fffdf8, #23251f);
+    --diet-surface-2: light-dark(#f8f5ed, #2c2e27);
+    --diet-text: light-dark(#22251f, #f2f3ec);
+    --diet-muted: light-dark(#72766c, #afb3a8);
+    --diet-line: light-dark(#dedbd1, #3d4037);
+    --diet-green: light-dark(#2f7351, #70c69a);
+    --diet-green-soft: light-dark(#e7f3eb, #243b2d);
+    --diet-red: light-dark(#bb5548, #ef8c7f);
+    --diet-red-soft: light-dark(#faebe7, #462b27);
+    --diet-gold: light-dark(#e7b765, #d4a958);
+    font-family: Inter, Pretendard, "Noto Sans KR", system-ui, sans-serif;
+    color: var(--diet-text);
+    max-width: 920px;
+    margin: 0 auto;
+  }
+  #diet-screen-design * { box-sizing: border-box; }
+  #diet-screen-design .diet-shell { background: var(--diet-bg); border: 1px solid var(--diet-line); border-radius: 24px; overflow: hidden; min-height: 720px; }
+  #diet-screen-design .diet-header { display: flex; align-items: center; justify-content: space-between; padding: 22px 28px; background: var(--diet-surface); border-bottom: 1px solid var(--diet-line); }
+  #diet-screen-design .diet-brand { display: flex; gap: 11px; align-items: center; font-weight: 800; letter-spacing: -.03em; }
+  #diet-screen-design .diet-mark { width: 34px; height: 34px; border-radius: 12px; display: grid; place-items: center; background: var(--diet-green-soft); }
+  #diet-screen-design .diet-tabs { display: flex; gap: 6px; padding: 4px; background: var(--diet-surface-2); border-radius: 12px; }
+  #diet-screen-design .diet-tab { border: 0; background: transparent; color: var(--diet-muted); font: inherit; font-weight: 700; padding: 9px 14px; border-radius: 9px; cursor: pointer; }
+  #diet-screen-design .diet-tab[aria-selected="true"] { background: var(--diet-surface); color: var(--diet-text); box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+  #diet-screen-design .diet-view { display: none; padding: 28px; }
+  #diet-screen-design .diet-view.is-active { display: block; }
+  #diet-screen-design .diet-daybar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; }
+  #diet-screen-design .diet-daybar h2 { margin: 0 0 5px; font-size: 25px; letter-spacing: -.04em; }
+  #diet-screen-design .diet-daybar p { margin: 0; color: var(--diet-muted); font-size: 13px; }
+  #diet-screen-design .diet-daynav { display: flex; align-items: center; gap: 8px; }
+  #diet-screen-design .diet-iconbutton { width: 38px; height: 38px; border: 1px solid var(--diet-line); background: var(--diet-surface); color: var(--diet-text); border-radius: 12px; font-size: 17px; cursor: pointer; }
+  #diet-screen-design .diet-weight { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 18px; padding: 20px; border-radius: 18px; background: var(--diet-green); color: white; margin-bottom: 18px; }
+  #diet-screen-design .diet-weight h3 { margin: 0 0 5px; font-size: 15px; }
+  #diet-screen-design .diet-weight p { margin: 0; opacity: .78; font-size: 12px; }
+  #diet-screen-design .diet-weight-entry { display: flex; align-items: center; gap: 8px; }
+  #diet-screen-design .diet-weight-entry input { width: 86px; border: 0; border-radius: 11px; padding: 11px; font: inherit; font-weight: 800; text-align: right; background: rgba(255,255,255,.94); color: #213128; }
+  #diet-screen-design .diet-weight-entry button { border: 0; background: #fff; color: #285b42; border-radius: 11px; padding: 11px 14px; font: inherit; font-weight: 800; cursor: pointer; }
+  #diet-screen-design .diet-meals { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  #diet-screen-design .diet-meal { background: var(--diet-surface); border: 2px solid var(--diet-line); border-radius: 18px; padding: 18px; min-height: 185px; display: flex; flex-direction: column; }
+  #diet-screen-design .diet-meal[data-state="clean"] { border-color: var(--diet-green); }
+  #diet-screen-design .diet-meal[data-state="free"] { border-color: var(--diet-red); }
+  #diet-screen-design .diet-mealhead { display: flex; justify-content: space-between; align-items: center; margin-bottom: 13px; }
+  #diet-screen-design .diet-mealhead strong { font-size: 16px; }
+  #diet-screen-design .diet-status { font-size: 11px; font-weight: 800; color: var(--diet-muted); }
+  #diet-screen-design .diet-meal[data-state="clean"] .diet-status { color: var(--diet-green); }
+  #diet-screen-design .diet-meal[data-state="free"] .diet-status { color: var(--diet-red); }
+  #diet-screen-design .diet-food { width: 100%; min-height: 55px; resize: none; border: 1px solid var(--diet-line); border-radius: 11px; background: var(--diet-surface-2); color: var(--diet-text); padding: 11px; font: inherit; font-size: 13px; }
+  #diet-screen-design .diet-mealfoot { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: auto; padding-top: 13px; }
+  #diet-screen-design .diet-types { display: flex; gap: 5px; }
+  #diet-screen-design .diet-type { border: 1px solid var(--diet-line); background: transparent; color: var(--diet-muted); border-radius: 999px; padding: 7px 9px; font: inherit; font-size: 11px; font-weight: 800; cursor: pointer; }
+  #diet-screen-design .diet-type.clean.is-selected { border-color: var(--diet-green); color: var(--diet-green); background: var(--diet-green-soft); }
+  #diet-screen-design .diet-type.free.is-selected { border-color: var(--diet-red); color: var(--diet-red); background: var(--diet-red-soft); }
+  #diet-screen-design .diet-save { border: 0; border-radius: 10px; padding: 8px 11px; background: var(--diet-text); color: var(--diet-surface); font: inherit; font-size: 11px; font-weight: 800; cursor: pointer; }
+  #diet-screen-design .diet-monthbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+  #diet-screen-design .diet-monthbar h2 { margin: 0; font-size: 25px; letter-spacing: -.04em; }
+  #diet-screen-design .diet-legend { display: flex; gap: 12px; color: var(--diet-muted); font-size: 12px; }
+  #diet-screen-design .diet-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 5px; }
+  #diet-screen-design .diet-dot.clean { background: var(--diet-green); }
+  #diet-screen-design .diet-dot.free { background: var(--diet-red); }
+  #diet-screen-design .diet-calendar { background: var(--diet-surface); border: 1px solid var(--diet-line); border-radius: 18px; padding: 15px; }
+  #diet-screen-design .diet-weekdays, #diet-screen-design .diet-days { display: grid; grid-template-columns: repeat(7, 1fr); }
+  #diet-screen-design .diet-weekdays span { text-align: center; padding: 10px 2px; color: var(--diet-muted); font-size: 11px; font-weight: 800; }
+  #diet-screen-design .diet-cell { min-height: 88px; padding: 9px; border-top: 1px solid var(--diet-line); position: relative; }
+  #diet-screen-design .diet-cell.has-day { cursor: pointer; border-left: 0; border-right: 0; border-bottom: 0; background-color: transparent; color: var(--diet-text); font: inherit; text-align: left; }
+  #diet-screen-design .diet-cell.has-day:hover { background: var(--diet-surface-2); border-radius: 12px; }
+  #diet-screen-design .diet-cell.is-today { background: var(--diet-green-soft); border-radius: 12px; }
+  #diet-screen-design .diet-num { font-size: 12px; font-weight: 700; }
+  #diet-screen-design .diet-face { width: 34px; height: 34px; border-radius: 12px; display: grid; place-items: center; margin: 7px auto 2px; font-size: 20px; }
+  #diet-screen-design .diet-face.clean { background: var(--diet-green-soft); }
+  #diet-screen-design .diet-face.free { background: var(--diet-red-soft); }
+  #diet-screen-design .diet-kg { text-align: center; color: var(--diet-muted); font-size: 10px; font-weight: 700; }
+  #diet-screen-design .diet-overlay { position: fixed; inset: 0; z-index: 50; display: none; align-items: center; justify-content: center; padding: 22px; background: rgba(17,20,16,.42); backdrop-filter: blur(3px); }
+  #diet-screen-design .diet-overlay.is-open { display: flex; }
+  #diet-screen-design .diet-detail { width: min(440px, 100%); max-height: min(680px, 90vh); overflow: auto; background: var(--diet-surface); border: 1px solid var(--diet-line); border-radius: 22px; box-shadow: 0 24px 70px rgba(0,0,0,.25); padding: 22px; }
+  #diet-screen-design .diet-detailhead { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 18px; }
+  #diet-screen-design .diet-detailhead h3 { margin: 0 0 5px; font-size: 21px; letter-spacing: -.03em; }
+  #diet-screen-design .diet-detailhead p { margin: 0; color: var(--diet-muted); font-size: 12px; }
+  #diet-screen-design .diet-detailclose { border: 1px solid var(--diet-line); background: var(--diet-surface-2); color: var(--diet-text); width: 34px; height: 34px; border-radius: 10px; cursor: pointer; font-size: 18px; }
+  #diet-screen-design .diet-summary { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
+  #diet-screen-design .diet-summaryitem { background: var(--diet-surface-2); border-radius: 13px; padding: 13px; }
+  #diet-screen-design .diet-summaryitem span { display: block; color: var(--diet-muted); font-size: 10px; font-weight: 800; margin-bottom: 4px; }
+  #diet-screen-design .diet-summaryitem strong { font-size: 15px; }
+  #diet-screen-design .diet-detailmeals { display: grid; gap: 8px; }
+  #diet-screen-design .diet-detailmeal { display: grid; grid-template-columns: 48px 1fr auto; gap: 10px; align-items: center; border: 1px solid var(--diet-line); border-radius: 13px; padding: 11px 12px; }
+  #diet-screen-design .diet-detailmeal strong { font-size: 12px; }
+  #diet-screen-design .diet-detailmeal p { margin: 0; font-size: 12px; color: var(--diet-text); }
+  #diet-screen-design .diet-detailmeal em { font-style: normal; font-size: 10px; font-weight: 800; }
+  #diet-screen-design .diet-detailmeal em.clean { color: var(--diet-green); }
+  #diet-screen-design .diet-detailmeal em.free { color: var(--diet-red); }
+  #diet-screen-design .diet-detailactions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 17px; }
+  #diet-screen-design .diet-detailactions button { border: 1px solid var(--diet-line); border-radius: 11px; padding: 10px 14px; font: inherit; font-size: 12px; font-weight: 800; cursor: pointer; background: var(--diet-surface-2); color: var(--diet-text); }
+  #diet-screen-design .diet-detailactions button:last-child { background: var(--diet-green); border-color: var(--diet-green); color: white; }
+  #diet-screen-design .diet-empty { text-align: center; padding: 34px 12px 20px; }
+  #diet-screen-design .diet-empty b { display: block; font-size: 16px; margin: 8px 0 4px; }
+  #diet-screen-design .diet-empty span { color: var(--diet-muted); font-size: 12px; }
+  @media (max-width: 620px) {
+    #diet-screen-design .diet-header { padding: 16px; }
+    #diet-screen-design .diet-brand span:last-child { display: none; }
+    #diet-screen-design .diet-view { padding: 16px; }
+    #diet-screen-design .diet-meals { grid-template-columns: 1fr; }
+    #diet-screen-design .diet-weight { grid-template-columns: 1fr; }
+    #diet-screen-design .diet-cell { min-height: 62px; padding: 5px; }
+    #diet-screen-design .diet-face { width: 27px; height: 27px; font-size: 16px; margin-top: 4px; }
+    #diet-screen-design .diet-kg { display: none; }
+    #diet-screen-design .diet-legend { display: none; }
+    #diet-screen-design .diet-overlay { align-items: flex-end; padding: 0; }
+    #diet-screen-design .diet-detail { width: 100%; max-height: 82vh; border-radius: 22px 22px 0 0; padding-bottom: 28px; }
+  }
+</style>
+<div id="diet-screen-design">
+  <div class="diet-shell">
+    <header class="diet-header">
+      <div class="diet-brand"><span class="diet-mark">🥬</span><span>오늘도 가볍게</span></div>
+      <nav class="diet-tabs" aria-label="화면 전환">
+        <button class="diet-tab" type="button" data-view="today" aria-selected="true">오늘 기록</button>
+        <button class="diet-tab" type="button" data-view="calendar" aria-selected="false">캘린더</button>
+      </nav>
+    </header>
+    <section class="diet-view is-active" data-panel="today">
+      <div class="diet-daybar">
+        <div><h2>8월 10일, 월요일</h2><p>식단과 체중을 기록해 오늘을 완성하세요.</p></div>
+        <div class="diet-daynav"><button class="diet-iconbutton" aria-label="이전 날짜">‹</button><button class="diet-iconbutton" aria-label="날짜 선택">▦</button><button class="diet-iconbutton" aria-label="다음 날짜">›</button></div>
+      </div>
+      <div class="diet-weight">
+        <div><h3>오늘의 체중</h3><p>날짜마다 한 번 저장하고 언제든 수정할 수 있어요.</p></div>
+        <div class="diet-weight-entry"><input type="number" value="60.5" step="0.1" aria-label="오늘의 체중"><span>kg</span><button type="button" id="diet-weight-save">저장</button></div>
+      </div>
+      <div class="diet-meals">
+        <article class="diet-meal" data-state="clean"><div class="diet-mealhead"><strong>아침</strong><span class="diet-status">클린식</span></div><textarea class="diet-food">두부 340g, 바나나</textarea><div class="diet-mealfoot"><div class="diet-types"><button type="button" class="diet-type clean is-selected" data-type="clean">클린식</button><button type="button" class="diet-type free" data-type="free">자유식</button></div><button type="button" class="diet-save">저장</button></div></article>
+        <article class="diet-meal" data-state="clean"><div class="diet-mealhead"><strong>점심</strong><span class="diet-status">클린식</span></div><textarea class="diet-food">연어 포케</textarea><div class="diet-mealfoot"><div class="diet-types"><button type="button" class="diet-type clean is-selected" data-type="clean">클린식</button><button type="button" class="diet-type free" data-type="free">자유식</button></div><button type="button" class="diet-save">저장</button></div></article>
+        <article class="diet-meal" data-state="clean"><div class="diet-mealhead"><strong>저녁</strong><span class="diet-status">클린식</span></div><textarea class="diet-food">닭가슴살, 양배추</textarea><div class="diet-mealfoot"><div class="diet-types"><button type="button" class="diet-type clean is-selected" data-type="clean">클린식</button><button type="button" class="diet-type free" data-type="free">자유식</button></div><button type="button" class="diet-save">저장</button></div></article>
+        <article class="diet-meal" data-state="free"><div class="diet-mealhead"><strong>간식</strong><span class="diet-status">자유식</span></div><textarea class="diet-food">카페라떼</textarea><div class="diet-mealfoot"><div class="diet-types"><button type="button" class="diet-type clean" data-type="clean">클린식</button><button type="button" class="diet-type free is-selected" data-type="free">자유식</button></div><button type="button" class="diet-save">저장</button></div></article>
+      </div>
+    </section>
+    <section class="diet-view" data-panel="calendar">
+      <div class="diet-monthbar"><div class="diet-daynav"><button class="diet-iconbutton">‹</button><h2>2026년 8월</h2><button class="diet-iconbutton">›</button></div><div class="diet-legend"><span><i class="diet-dot clean"></i>모두 클린식</span><span><i class="diet-dot free"></i>자유식 포함</span></div></div>
+      <div class="diet-calendar"><div class="diet-weekdays"><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span><span>일</span></div><div class="diet-days" id="diet-days"></div></div>
+    </section>
+  </div>
+  <div class="diet-overlay" id="diet-detail-overlay" aria-hidden="true">
+    <section class="diet-detail" role="dialog" aria-modal="true" aria-labelledby="diet-detail-title">
+      <div class="diet-detailhead"><div><h3 id="diet-detail-title">8월 10일, 월요일</h3><p id="diet-detail-subtitle">이날의 식단과 체중 기록</p></div><button type="button" class="diet-detailclose" aria-label="닫기">×</button></div>
+      <div id="diet-detail-content"></div>
+      <div class="diet-detailactions"><button type="button" class="diet-detailcancel">닫기</button><button type="button" class="diet-detailedit">수정하기</button></div>
+    </section>
+  </div>
+</div>
+<script>
+(() => {
+  const root = document.getElementById('diet-screen-design');
+  root.querySelectorAll('.diet-tab').forEach(tab => tab.addEventListener('click', () => {
+    root.querySelectorAll('.diet-tab').forEach(x => x.setAttribute('aria-selected', String(x === tab)));
+    root.querySelectorAll('.diet-view').forEach(x => x.classList.toggle('is-active', x.dataset.panel === tab.dataset.view));
+  }));
+  root.querySelectorAll('.diet-type').forEach(button => button.addEventListener('click', () => {
+    const meal = button.closest('.diet-meal');
+    const type = button.dataset.type;
+    meal.dataset.state = type;
+    meal.querySelectorAll('.diet-type').forEach(x => x.classList.toggle('is-selected', x === button));
+    meal.querySelector('.diet-status').textContent = type === 'clean' ? '클린식' : '자유식';
+  }));
+  root.querySelectorAll('.diet-save').forEach(button => button.addEventListener('click', () => {
+    const original = button.textContent; button.textContent = '저장됨 ✓'; setTimeout(() => button.textContent = original, 900);
+  }));
+  root.querySelector('#diet-weight-save').addEventListener('click', e => { const original = e.currentTarget.textContent; e.currentTarget.textContent = '저장됨 ✓'; setTimeout(() => e.currentTarget.textContent = original, 900); });
+  const records = {3:['clean','61.2'],4:['free','61.0'],5:['clean','60.9'],6:['clean','60.8'],7:['free','60.8'],8:['clean','60.7'],9:['clean','60.6'],10:['free','60.5'],12:['clean','60.3'],13:['clean','60.2'],15:['free','60.4'],16:['clean','60.1'],18:['clean','60.0'],20:['clean','59.9'],22:['free','60.1'],23:['clean','59.8']};
+  const mealsByDay = {
+    10:[['아침','두부 340g, 바나나','clean'],['점심','연어 포케','clean'],['저녁','닭가슴살, 양배추','clean'],['간식','카페라떼','free']],
+    9:[['아침','그릭요거트, 블루베리','clean'],['점심','현미밥, 연어구이','clean'],['저녁','두부 샐러드','clean'],['간식','아몬드 10알','clean']],
+    15:[['아침','삶은 달걀, 사과','clean'],['점심','닭가슴살 샐러드','clean'],['저녁','피자 2조각','free'],['간식','기록 없음','none']]
+  };
+  const days = root.querySelector('#diet-days');
+  for (let blank = 0; blank < 5; blank++) days.insertAdjacentHTML('beforeend','<div class="diet-cell"></div>');
+  for (let day = 1; day <= 31; day++) {
+    const record = records[day];
+    days.insertAdjacentHTML('beforeend', `<button type="button" class="diet-cell has-day ${day === 10 ? 'is-today' : ''}" data-day="${day}" aria-label="8월 ${day}일 기록 보기"><span class="diet-num">${day}</span>${record ? `<div class="diet-face ${record[0]}">${record[0] === 'clean' ? '🙂' : '😈'}</div><div class="diet-kg">${record[1]}kg</div>` : ''}</button>`);
+  }
+  const overlay = root.querySelector('#diet-detail-overlay');
+  const detailContent = root.querySelector('#diet-detail-content');
+  const detailTitle = root.querySelector('#diet-detail-title');
+  const editButton = root.querySelector('.diet-detailedit');
+  let selectedDay = 10;
+  function closeDetail() { overlay.classList.remove('is-open'); overlay.setAttribute('aria-hidden','true'); }
+  function openDetail(day) {
+    selectedDay = day;
+    const record = records[day];
+    const mealRows = mealsByDay[day] || (record ? [['아침','오트밀, 바나나','clean'],['점심','닭가슴살 포케',record[0]],['저녁','채소 수프','clean'],['간식','기록 없음','none']] : null);
+    detailTitle.textContent = `8월 ${day}일`;
+    if (!record) {
+      detailContent.innerHTML = '<div class="diet-empty"><div style="font-size:28px">📝</div><b>아직 기록이 없어요</b><span>이날의 체중과 식단을 기록해보세요.</span></div>';
+      editButton.textContent = '기록하기';
+    } else {
+      detailContent.innerHTML = `<div class="diet-summary"><div class="diet-summaryitem"><span>하루 판정</span><strong>${record[0] === 'clean' ? '🙂 클린식' : '😈 자유식 포함'}</strong></div><div class="diet-summaryitem"><span>체중</span><strong>${record[1]}kg</strong></div></div><div class="diet-detailmeals">${mealRows.map(m => `<div class="diet-detailmeal"><strong>${m[0]}</strong><p>${m[1]}</p><em class="${m[2]}">${m[2] === 'clean' ? '클린식' : m[2] === 'free' ? '자유식' : '기록 없음'}</em></div>`).join('')}</div>`;
+      editButton.textContent = '수정하기';
+    }
+    overlay.classList.add('is-open'); overlay.setAttribute('aria-hidden','false'); root.querySelector('.diet-detailclose').focus();
+  }
+  days.addEventListener('click', e => { const cell = e.target.closest('[data-day]'); if (cell) openDetail(Number(cell.dataset.day)); });
+  root.querySelector('.diet-detailclose').addEventListener('click', closeDetail);
+  root.querySelector('.diet-detailcancel').addEventListener('click', closeDetail);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeDetail(); });
+  editButton.addEventListener('click', () => {
+    closeDetail(); root.querySelector('[data-view="today"]').click();
+    root.querySelector('.diet-daybar h2').textContent = `8월 ${selectedDay}일`;
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && overlay.classList.contains('is-open')) closeDetail(); });
+})();
+</script>
