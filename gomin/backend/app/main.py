@@ -1,0 +1,52 @@
+from collections.abc import AsyncIterator
+from contextlib import asynccontextmanager
+
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from httpx import AsyncClient as AsyncHttpClient, Timeout
+
+from app.api.routes.health import router as health_router
+from app.api.routes.auth import router as auth_router
+from app.api.routes.sessions import router as sessions_router
+from app.api.routes.signup import router as signup_router
+from app.api.routes.google_oauth import router as google_oauth_router
+from app.ai.client import CodysseyClient, GeminiClient
+from app.api.routes.diary import router as diary_router
+from app.api.routes.talk import router as talk_router
+from app.auth.google_provider import GoogleProvider
+from app.core.config import get_settings
+from app.core.exception_handlers import ERROR_RESPONSES, register_exception_handlers
+from app.db.client import create_supabase_client
+
+settings = get_settings()
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI) -> AsyncIterator[None]:
+    async with AsyncHttpClient(timeout=Timeout(10, connect=5)) as http_client:
+        app.state.supabase = await create_supabase_client(settings, http_client)
+        app.state.google_provider = GoogleProvider(http_client, settings)
+        app.state.ai_client = CodysseyClient(http_client, settings)
+        app.state.image_ai_client = GeminiClient(http_client, settings)
+        yield
+
+
+app = FastAPI(title="Gomin API", version="0.1.0", lifespan=lifespan, responses=ERROR_RESPONSES)
+register_exception_handlers(app)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=settings.cors_origins,
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allow_headers=["Content-Type", "Authorization"],
+)
+
+app.include_router(health_router)
+
+app.include_router(sessions_router)
+app.include_router(auth_router)
+app.include_router(signup_router)
+
+app.include_router(google_oauth_router)
+app.include_router(diary_router)
+app.include_router(talk_router)

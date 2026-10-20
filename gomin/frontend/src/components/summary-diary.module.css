@@ -1,0 +1,25 @@
+.content:global(.page-content) {
+  --diary-header-height: var(--header-height);
+  display: flex;
+  flex-direction: column;
+  padding-block: 24px calc(24px + var(--diary-header-height));
+}
+.card { flex: none; width: min(100% - 32px, 640px); margin: auto; padding: 24px; background: #fffaf2; border-radius: 20px; }
+.card h1 { font-size: 28px; }
+.card p, .card li { line-height: 1.7; }
+.encouragement { white-space: pre-line; }
+.card button { padding: 12px 20px; border: 0; border-radius: 12px; background: #466448; color: white; cursor: pointer; }
+.card button:disabled { opacity: .6; cursor: wait; }
+.actions { display: flex; gap: 12px; }
+.actions button { flex: 1; min-width: 0; min-height: 48px; }
+.card .secondary { border: 1px solid #466448; background: transparent; color: #466448; }
+.card button:focus-visible { outline: 2px solid #294f47; outline-offset: 3px; }
+.imageFrame { position: relative; margin: 16px 0; }
+.image { display: block; width: 100%; height: auto; border-radius: 12px; }
+.aiBadge { position: absolute; right: 8px; bottom: 8px; padding: 4px 8px; border: 1px solid rgb(255 252 245 / 30%); border-radius: 999px; background: rgb(11 14 13 / 65%); color: #fffcf5; font: 600 12px/1.2 sans-serif; letter-spacing: .04em; pointer-events: none; }
+@media (max-width: 767px) {
+  .content:global(.page-content) { --diary-header-height: 64px; }
+}
+@media (max-width: 480px) {
+  .actions { flex-direction: column; }
+}

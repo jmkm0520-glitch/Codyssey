@@ -1,0 +1,93 @@
+# 프로젝트 문서
+
+## 프로젝트 기획·요구 명세
+
+- [프로젝트 문서](final-project/README.md): 기획서, 기능 요구 명세서와 참고 자료 목차
+- [프로젝트 기획서](final-project/proposal.md): 문제 정의, 타겟 사용자, AI 활용 방식, 기술적 접근과 일정 계획
+- [기술 스택 선정 이유](final-project/technology-selection.md): 과제 경험, AI 개발 지원, API 비용과 운영 부담을 고려한 선택 근거
+- [기능 요구 명세서](final-project/requirements/README.md): 기능·비기능 요구사항과 시스템 아키텍처
+- [사용자 피드백과 개선 결과](final-project/references/user-testing.md): 실사용자 5명의 피드백과 개선 내용
+- [발표자료 PPTX](final-project/gomin-presentation.pptx): 프로젝트 결과 발표자료
+- [발표자료 Google Slides](https://docs.google.com/presentation/d/1Kepse_Rnh3sg62i3V0yE0dS6p29cXhsR/edit)
+- [서비스 시연 자료](final-project/demo/README.md): 시연영상과 서비스 흐름 단계별 캡처
+
+## 스터디·웹 개발 기초
+
+- [웹 개발 기초 목차](study/README.md)
+- [웹 서비스는 어떻게 움직일까](study/web/web-basics.md): 브라우저, 클라이언트·서버와 전체 흐름
+- [HTTP와 요청·응답](study/web/http.md): URL, 헤더·본문, 상태 코드와 JSON
+- [API란 무엇일까](study/api/api-basics.md): API, 엔드포인트, 명세와 SDK
+- [REST API](study/api/rest-api.md): 리소스, HTTP 메서드, 멱등성과 설계 원칙
+- [프론트엔드와 Next.js](study/application/frontend.md): 화면 기술, 컴포넌트와 렌더링
+- [백엔드와 FastAPI·Uvicorn](study/application/backend.md): 요청 처리, 서버 프로그램과 비동기
+- [데이터베이스와 Supabase](study/data/database.md): 테이블·관계, SQL, 트랜잭션과 Data API
+- [파일 저장소와 Supabase Storage](study/data/storage.md): 파일, 버킷, 객체 경로와 접근 범위
+- [인증과 인가](study/application/authentication.md): 사용자 확인·권한과 쿠키·세션
+- [CORS와 출처](study/application/cors.md): 브라우저 정책, 사전 요청과 쿠키 전송
+- [배포의 기본 개념](study/deployment/deployment-basics.md): 실행 환경, 빌드·실행과 환경변수
+- [배포 플랫폼의 역할](study/deployment/platforms.md): Vercel·Render·Supabase의 역할과 연결
+- [모니터링과 UptimeRobot](study/operations/monitoring.md): 로그·지표, 상태 API와 검사 범위
+- [웹 개발 용어 사전](study/glossary.md)
+
+## 시작하기·로컬 개발
+
+- [공통 설치 흐름](local-development/setup/README.md): 설치 대상 선택과 재설치
+- [Windows 준비 사항](local-development/setup/windows.md)
+- [macOS / Linux 준비 사항](local-development/setup/macos-linux.md)
+- [실행·재시작·종료](local-development/runtime.md): 공통 실행기 사용
+- [환경변수와 로컬 서비스](local-development/environment.md): 설정 기준과 서비스 주소
+- [서버 개별 실행](local-development/manual-run.md): 공통 실행기 없이 직접 실행
+- [로컬 개발환경 설치·실행 문제 해결](local-development/setup-runtime-troubleshooting.md)
+- [로컬 테스트 사용자](local-development/test-users.md): 회원가입과 함께 제공하는 더미 계정 3개와 seed 적용
+
+## 시스템·공통 모듈
+
+- [시스템 아키텍처](ARCHITECTURE.md): 기술 스택, 폴더 구조, 구성 요소와 통신 방식
+- [공통 API 응답 모델](engineering/api-response.md): 성공·오류 규격, 양쪽 모델과 호출·검증 방법
+- [SMTP·Resend 이메일 발송](engineering/email-delivery.md): 모듈 설정·호출과 발송 오류 처리
+- [Supabase Storage 파일 저장 모듈](engineering/file-storage.md): Supabase 저장 모듈·의존성 주입·설정과 사용 방법
+
+## 인증
+
+- [공통 인증·DB 기반](engineering/auth-foundation.md): 인증 4개 테이블·DB 함수, 암호화·세션·쿠키와 직접 API 호출
+- [회원가입 구현](engineering/signup.md): 이메일 인증·일회용 증표·약관·세션 API와 검증 범위
+- [이메일 로그인과 세션](engineering/login-auth.md): 로그인 API·세션 쿠키·화면 연동과 검증
+- [Google OAuth 흐름 관리](engineering/google-oauth-flow.md): 인증 호출 순서·상태 수명·화면 복귀·예외 처리의 관리 기준
+- [인증 화면 디자인](frontend/auth-ui.md): 로그인·회원가입 화면, 입력 동작과 인증 API 연동 범위
+
+## 화면·사용자 흐름
+
+- [공용 화면과 배경 매핑](frontend/shared-ui.md): 메뉴 경로, 노출 기준, Figma 자산과 반응형 표시
+- [털어놓기 MVP 구현·후속 전달](engineering/talk-mvp.md): REST 채팅·Codyssey 응답과 요약·확정 API, 응답 대기 처리와 기존 그림일기 연결
+- [GOMIN-69 털어놓기 MVP 공유 설계](https://younkim.atlassian.net/wiki/spaces/GOMIN/pages/3670056): 담당 경계·원문 범위·저장과 실행 방식의 검토안
+- [홈 화면](frontend/home-ui.md): 소개·대화 시작, PC·모바일 배치와 Figma 자산 출처
+- [가이드 화면](frontend/guide-ui.md): 이용 단계, PC·모바일 배치와 Figma 일러스트 출처
+- [컬렉션 조회 화면](frontend/collection-ui.md): 본인 저장 목록·상세 API 연동, PC 필름·팝업과 모바일 상세
+- [공개 문서 화면](frontend/docs-ui.md): `/docs/` 공개 범위, 문서 생성·링크·레이아웃과 배포
+- [공개 문서 영역 설계 — 검토안](https://younkim.atlassian.net/wiki/spaces/GOMIN/pages/3670018): 원본 Markdown을 유지하는 `/docs/` 공개 화면 설계
+
+## 데이터베이스
+
+- [요약 기반 그림일기 MVP](engineering/diary-mvp.md): 직접 이미지 생성, 컬렉션 저장·목록·상세 조회
+- [대화·컬렉션 ERD](engineering/conversation-collection-erd.md): 테이블·관계·제약조건, Supabase SQL과 ID 생성·재시도 관련 질문·답변
+- [Supabase 마이그레이션 관리](engineering/database-migrations.md): SQL 작성·검토, 로컬·PR 검증, 운영 적용과 실패 처리
+
+## 개발·협업
+
+- [코딩과 검증 규칙](engineering/coding-conventions.md)
+- [털어놓기 MVP 검증](engineering/talk-mvp-qa.md): GOMIN-71 검수 22개, 모의 검증·실제 AI·DB 적용·배포 구분
+- [커밋 메시지 작성 규칙](engineering/commit-messages.md): 타입별 기준과 작성 예시
+- [PR 작성 규칙](engineering/pull-requests.md): 프로젝트 스킬, Jira 작업 번호·변경 내용·개조체 작성 기준
+- [이슈 유형과 작업 분해 기준](engineering/jira-issue-guide.md)
+- [설계문서 보관 규칙](engineering/design-document-storage.md): 로컬 제외 경로, 공유 설계문서 등록과 관련 작업 연결
+
+## 배포·운영
+
+- [배포·운영 개요](deployment/README.md): 서비스 구성, 공통 배포 순서와 배포 후 확인
+- [Vercel — Next.js](deployment/vercel.md): 프론트엔드 빌드·환경변수·공개 문서와 배포 확인
+- [Render — FastAPI·Uvicorn](deployment/render.md): 백엔드 실행·인증·Google OAuth·메일 설정과 배포 확인
+- [Supabase — 데이터베이스](deployment/supabase-database.md): Data API·서버 연결·운영 마이그레이션과 DB 상태 확인
+- [Supabase — Storage](deployment/supabase-storage.md): 업로드 모듈·버킷·크기·MIME 제한과 운영 확인 범위
+- [UptimeRobot — 모니터링](deployment/uptimerobot.md): 백엔드 상태 API의 5분 간격 확인·이메일 알림과 장애 대응
+
+[프로젝트 README](../README.md)

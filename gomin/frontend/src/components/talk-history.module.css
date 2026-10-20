@@ -1,0 +1,22 @@
+.history { align-self: center; }
+.toggle { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 10px; background: transparent; color: #374d44; cursor: pointer; }
+.toggle:hover, .toggle[aria-expanded="true"] { background: #eeece5; }
+.history button:focus-visible, .history a:focus-visible { outline: 2px solid #273450; outline-offset: 2px; }
+.panel { position: absolute; z-index: 15; left: 0; top: var(--header-height); bottom: 0; width: min(340px, 100%); padding: 24px 20px; border-right: 1px solid #e3e0d8; background: #fffefa; box-shadow: 8px 0 24px rgb(39 52 80 / 6%); overflow-y: auto; overscroll-behavior: contain; font-size: 18px; }
+.toolbar { display: flex; justify-content: flex-end; }
+.toolbar button { width: 44px; height: 44px; border: 0; background: transparent; color: #374d44; font: inherit; font-size: 28px; cursor: pointer; }
+.newTalk { display: flex; justify-content: space-between; align-items: center; padding: 14px 4px; margin-block: 12px 24px; border-bottom: 1px solid #e3e0d8; text-decoration: none; }
+.panel h3 { margin: 24px 0 8px; font-size: 16px; font-weight: 400; color: #77786f; }
+.panel ul { list-style: none; margin: 0; padding: 0; }
+.panel li a { display: block; padding: 12px 10px; border-radius: 8px; text-decoration: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.panel li a:hover, .panel li a[aria-current="page"] { background: #f1efe8; }
+.retry { border: 1px solid #d8ded4; border-radius: 8px; padding: 8px 12px; color: inherit; font: inherit; background: #fff; cursor: pointer; }
+@media (max-width: 767px) { .history { position: absolute; left: 12px; top: 10px; } .panel { position: fixed; top: 64px; width: min(320px, 100%); padding: 16px; } }
+
+.serviceLinks { display: none; }
+@media (min-width: 768px) { .history + :global(.site-brand) { margin-right: auto; } }
+@media (max-width: 767px) {
+  .serviceLinks { display: flex; flex-direction: column; padding-block: 8px; border-bottom: 1px solid #e3e0d8; }
+  .serviceLinks a { display: block; min-height: 44px; padding: 10px; border-radius: 8px; text-decoration: none; }
+  .serviceLinks a:hover { background: #f1efe8; }
+}
